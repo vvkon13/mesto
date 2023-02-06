@@ -40,7 +40,7 @@
 
 .page__content {
     max-width: 880px;
-    margin: 40px auto 84px auto;
+    margin: 40px auto 67px auto;
 
 }
 
@@ -100,7 +100,7 @@
     overflow: hidden;
     max-width: calc(100vw - 400px);
 
-  
+
 }
 
 .profile__description {
@@ -116,7 +116,7 @@
     white-space: nowrap;
     overflow: hidden;
     max-width: calc(100vw - 350px);
-  
+
 }
 
 .profile__button-change{
@@ -175,7 +175,7 @@
     height: 282px;
     margin: 0;
     padding: 0;
-    
+
 }
 
 .card__description {
@@ -185,7 +185,7 @@
     padding: 0;
     align-items: center;
     justify-content: space-between;
-    
+
 
 }
 
@@ -221,7 +221,7 @@ position: relative;
 }
 
 .card__pseudo-check-button {
-    
+
 height: 19px;
 width: 22px;
 /* border: none; */
@@ -236,12 +236,12 @@ display: block;
     .card__button-like:checked + .card__pseudo-check-button {
       background-image :url("./images/active-like-icon.svg");
     }
-    
+
     .card__button-like:disabled + .card__pseudo-check-button {
         background-image :url("./images/disabled-like-icon.svg");
-      
+
     }
-    
+
 
     .card__button-like:focus + .form__pseudo-item_type_checkbox{
         opacity: 0.5;
@@ -277,7 +277,7 @@ box-sizing: border-box;
 }
 
 .popap__header {
-    
+
     margin: 0 auto;
     padding: 0;
     width: 358px;
@@ -351,7 +351,7 @@ color: #FFFFFF
     margin: 0;
     border: none;
     background-color: transparent
-    
+
 
 }
 
@@ -369,7 +369,7 @@ border: none;
     max-width: 880px;
     margin: 0 auto;
 
-    padding: 0;
+    padding: 0 0 60px 0;
 }
 
 .footer__text {
