@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Места России. ">
+    <meta name="keywords" content="Россия">
+    <meta name="author" content="Василий Коновалов">
+    <title>Места России</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="page">
+        <header class="header page__header">
+            <img src="./images/header-logo.svg" alt="Логотип Место" class="logo header__logo">
+        </header>
+        <main class="content page__content">
+            <section class="profile content__profile">
+                <div class="profile__main">
+                    <img src="./images/profile-photo.jpg" alt="Фото Профиль" class="profile__photo">
+                    <div class="profile__info">
+                        <div class="profile__string-and-button">
+                            <h1 class="profile__name">Жак-Ив КустоЖак-Ив КустоЖак-Ив КустоЖак-Ив КустоЖак-Ив КустоЖак-Ив КустоЖак-Ив КустоЖак-Ив КустоЖак-Ив Кусто</h1>
+                            <button class="button-with-img profile__button-change">
+                                <img src="./images/editbutton-img.svg" alt="Картинка плюс в кнопке" class="button-with-img__image">
+                            </button>
+                        </div>
+                        <p class="profile__description">Исследователь океанаИсследователь океанаИсследователь океанаИсследователь океанаИсследователь океанаИсследователь океанаИсследователь океанаИсследователь океана</p>
+                    </div>
+                </div>
+                <button class="button-with-img profile__button-add">
+                    <img src="./images/addbutton-img.svg" alt="Кнопка добавления мест" class="button-with-img__image">
+                </button>
+
+
+            </section>
+            <section class="content__elements">
+                <ul class="elements">
+                    <li class="card elements__item">
+                        <img src="./images/dombay.jpg" alt="Фото Места" class="card__photo">
+                        <div class="card__description">
+                            <h2 class="card__name">Домбай</h2>
+                            <label class="card__button-wraper" for = "cardlike1">
+                                <input class = "card__button-like" type ="checkbox" id="cardlike1" name ="checklike" value="cardlike">
+                                <span class = "card__pseudo-check-button"></span>
+                            </label>
+
+                        </div>
+                    </li>
+                    <li class="card elements__item">
+                        <img src="./images/elbrus.jpg" alt="Фото Места" class="card__photo">
+                        <div class="card__description">
+                            <h2 class="card__name">Гора Эльбрус</h2>
+                            <label class="card__button-wraper" for = "cardlike2">
+                                <input class = "card__button-like" type ="checkbox" id="cardlike2" name ="checklike" value="cardlike">
+                                <span class = "card__pseudo-check-button"></span>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="card elements__item">
+                        <img src="./images/elton.jpg" alt="Фото Места" class="card__photo">
+                        <div class="card__description">
+                            <h2 class="card__name">Эльтон</h2>
+                            <label class="card__button-wraper" for = "cardlike3">
+                                <input class = "card__button-like" type ="checkbox" id="cardlike3" name ="checklike" value="cardlike">
+                                <span class = "card__pseudo-check-button"></span>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="card elements__item">
+                        <img src="./images/karachaevsk.jpg" alt="Фото Места" class="card__photo">
+                        <div class="card__description">
+                            <h2 class="card__name">Карачаевск</h2>
+                            <label class="card__button-wraper" for = "cardlike4">
+                                <input class = "card__button-like" type ="checkbox" id="cardlike4" name ="checklike" value="cardlike">
+                                <span class = "card__pseudo-check-button"></span>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="card elements__item">
+                        <img src="./images/saratov-bridge.jpg" alt="Фото Места" class="card__photo">
+                        <div class="card__description">
+                            <h2 class="card__name">Саратов</h2>
+                            <label class="card__button-wraper" for = "cardlike5">
+                                <input class = "card__button-like" type ="checkbox" id="cardlike5" name ="checklike" value="cardlike">
+                                <span class = "card__pseudo-check-button"></span>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="card elements__item">
+                        <img src="./images/karachaevsk.jpg" alt="Фото Места" class="card__photo">
+                        <div class="card__description">
+                            <h2 class="card__name">Карачаево-черкесская республика</h2>
+                            <label class="card__button-wraper" for = "cardlike6">
+                                <input class = "card__button-like" type ="checkbox" id="cardlike6" name ="checklike" value="cardlike">
+                                <span class = "card__pseudo-check-button"></span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+
+
+            </section>
+
+
+        </main>
+        <section class="popap">
+            <div class ="popap__container">
+              <h2 class="popap__header">Редактировать профиль</h2>
+              <input type="text" placeholder="Имя" class="popap__name">
+              <input type="text" placeholder="О себе" class="popap__description">
+              <button class="popap__button-save">Сохранить</button>
+              <button class="popap__button-close">
+                  <img src="./images/close-Icon.svg" alt="Крестик" class="popap__img-tigger">
+              </button>
+            </div>
+        </section>        
+        <footer class="footer">
+            <p class="footer__text">© 2020 Mesto Russia</p>
+
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>

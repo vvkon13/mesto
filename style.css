@@ -1,0 +1,386 @@
+.page {
+    position: relative;
+    z-index: 1;
+    background: #000000;
+    color: #FFFFFF;
+
+
+}
+.page__header {
+    max-width: 880px;
+    min-height: 74px;
+    margin: 0 auto;
+
+}
+
+.header {
+    display: flex;
+    padding: 45px 0 0 0;
+    justify-content: left;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(84, 84, 84, .7);
+}
+
+.header__logo {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+}
+
+.logo {
+    width: 142px;
+    height: 33px;
+
+}
+
+.content {
+    position: relative;
+    padding: 0;
+}
+
+.page__content {
+    max-width: 880px;
+    margin: 40px auto 84px auto;
+
+}
+
+.profile {
+    display: flex;
+    padding: 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content__profile {
+    margin: 0 0 50px 0;
+}
+
+.profile__main {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.profile__photo {
+    display: block;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: solid 1px green;
+    text-align: center;
+
+}
+
+.profile__info {
+    max-width: 550px;
+}
+
+.profile__string-and-button {
+    display: flex;
+    gap: 17px;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile__name {
+    font-family: Inter;
+    font-size: 42px;
+    font-weight: 500;
+    line-height: 48px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: calc(100vw - 400px);
+
+  
+}
+
+.profile__description {
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: calc(100vw - 350px);
+  
+}
+
+.profile__button-change{
+    width: 24px;
+    height: 24px;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    background: #000000;
+
+}
+
+.profile__button-add {
+    min-width: 150px;
+    min-height: 50px;
+    border: 2px solid #FFFFFF;
+    border-radius: 2px;
+    background: #000000;
+    box-sizing: border-box;
+
+}
+
+.content__elements {
+    margin: 0 auto;
+    padding: 0;
+}
+
+.elements {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px 17px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.card {
+    width: 282px;
+    min-height: 361px;
+    border-radius: 10px;
+    border: 1px solid rgb(107, 10, 10);
+    background: #FFFFFF;
+    color: rgba(0, 0, 0, 1);
+
+
+    box-sizing: border-box;
+    overflow: hidden;
+
+}
+
+.card__photo {
+    display: block;
+    max-width: 282px;
+    height: 282px;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.card__description {
+    display: flex;
+    width: 246px;
+    margin: 21px auto 0 auto;
+    padding: 0;
+    align-items: center;
+    justify-content: space-between;
+    
+
+}
+
+.card__name {
+  margin: 0;
+  padding: 0;
+  font-family: Inter;
+font-size: 24px;
+font-weight: 900;
+line-height: 29px;
+letter-spacing: 0em;
+text-align: left;
+text-overflow: ellipsis;
+white-space: nowrap;
+overflow: hidden;
+}
+
+.card__button-wraper {
+    height: 19px;
+width: 22px;
+position: relative;
+}
+.card__button-like {
+
+
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+
+
+
+}
+
+.card__pseudo-check-button {
+    
+height: 19px;
+width: 22px;
+/* border: none; */
+/* background-color: transparent; */
+background-image :url("./images/disabled-like-icon.svg");
+display: block;
+}
+
+
+
+
+    .card__button-like:checked + .card__pseudo-check-button {
+      background-image :url("./images/active-like-icon.svg");
+    }
+    
+    .card__button-like:disabled + .card__pseudo-check-button {
+        background-image :url("./images/disabled-like-icon.svg");
+      
+    }
+    
+
+    .card__button-like:focus + .form__pseudo-item_type_checkbox{
+        opacity: 0.5;
+    }
+
+.popap {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    color: #000000;
+
+
+}
+
+.popap_opened {
+display: block;
+}
+
+.popap__container {
+width: 430px;
+height: 330px;
+margin: calc(50vh - 165px) auto;
+padding: 34px 0 37px 0;
+position: relative;
+background: #FFFFFF;
+box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+border-radius: 10px;
+box-sizing: border-box;
+}
+
+.popap__header {
+    
+    margin: 0 auto;
+    padding: 0;
+    width: 358px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.popap__name {
+    display: block;
+    margin: 53px auto 0 auto;
+    padding: 0;
+    width: 358px;
+    min-height: 27px;
+    box-sizing: border-box;
+    font-family: Inter;
+font-size: 14px;
+font-weight: 400;
+line-height: 17px;
+letter-spacing: 0em;
+text-align: left;
+border: none;
+border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+}
+
+.popap__description {
+    display: block;
+    margin: 31px auto 48px auto;
+    padding: 0;
+    width: 358px;
+    min-height: 27px;
+    box-sizing: border-box;
+    font-family: Inter;
+font-size: 14px;
+font-weight: 400;
+line-height: 17px;
+letter-spacing: 0em;
+text-align: left;
+border: none;
+border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+}
+
+.popap__button-save {
+    display: block;
+    margin: 0 auto 48px auto;
+    padding: 0;
+    width: 358px;
+    min-height: 50px;
+    font-family: Inter;
+font-size: 18px;
+font-weight: 400;
+line-height: 22px;
+letter-spacing: 0em;
+text-align: center;
+background: #000000;
+border-radius: 2px;
+color: #FFFFFF
+
+}
+
+.popap__button-close {
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent
+    
+
+}
+
+.popap__img-tigger{
+display: block;
+padding: 0;
+margin: 0;
+width: 32px;
+height: 32px;
+
+border: none;
+
+}
+.footer {
+    max-width: 880px;
+    margin: 0 auto;
+
+    padding: 0;
+}
+
+.footer__text {
+    margin: 0;
+    padding: 0;
+    font-family: Inter;
+font-size: 18px;
+font-weight: 400;
+line-height: 22px;
+letter-spacing: 0em;
+text-align: left;
+color: rgba(84, 84, 84, 1);
+
+}
