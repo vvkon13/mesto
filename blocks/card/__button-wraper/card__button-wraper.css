@@ -1,0 +1,10 @@
+.card__button-wraper {
+  height: 19px;
+  width: 22px;
+  position: relative;
+}
+
+.card__button-wraper:hover {
+  opacity: 0.6;
+  transition: opacity 100ms ease-in;
+}

@@ -1,0 +1,12 @@
+.profile__button-edit-img {
+  display: block;
+  width: 10px;
+  height: 10px;
+}
+
+@media (max-width:564px) {
+  .profile__button-edit-img {
+    width: 7.5px;
+    height: 7.5px;
+  }
+}

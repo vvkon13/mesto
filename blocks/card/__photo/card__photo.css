@@ -1,0 +1,7 @@
+.card__photo {
+  display: block;
+  max-width: 282px;
+  height: 282px;
+  margin: 0;
+  padding: 0;
+}

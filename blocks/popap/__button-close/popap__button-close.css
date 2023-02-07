@@ -1,0 +1,22 @@
+.popap__button-close {
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent
+}
+
+@media (max-width:564px) {
+  .popap__button-close {
+    right: 0;
+    top: -36px;
+  }
+}
+
+.popap__button-close:hover {
+  opacity: 0.6;
+  transition: opacity 100ms ease-in;
+}

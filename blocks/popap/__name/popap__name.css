@@ -1,0 +1,24 @@
+.popap__name {
+  display: block;
+  margin: 53px auto 0 auto;
+  padding: 0;
+  width: 358px;
+  min-height: 27px;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  color: #000000;
+}
+
+@media (max-width:564px) {
+  .popap__name {
+    width: 238px;
+    margin: 75px auto 0 auto;
+  }
+}
