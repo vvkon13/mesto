@@ -412,6 +412,7 @@
 
 .popap_opened {
   display: block;
+  background-color: rgba(0, 0, 0, .5);
 }
 
 .popap__container {
@@ -453,6 +454,7 @@
   text-align: left;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  color: #000000;
 
 }
 
@@ -471,6 +473,7 @@
   text-align: left;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  color: #000000;
 
 }
 
