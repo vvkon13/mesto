@@ -3,16 +3,12 @@
   z-index: 1;
   background: #000000;
   color: #FFFFFF;
-
-
 }
 
 .page__header {
   max-width: 880px;
   margin: 0 auto;
-
 }
-
 
 .header {
   display: flex;
@@ -28,7 +24,6 @@
   }
 }
 
-
 .header__logo {
   padding: 0;
   margin: 0;
@@ -38,17 +33,14 @@
 .logo {
   width: 142px;
   height: 33px;
-
 }
 
 @media (max-width:600px) {
   .logo {
     width: 103.74px;
     height: 24.4px;
-
   }
 }
-
 
 .content {
   position: relative;
@@ -58,7 +50,6 @@
 .page__content {
   max-width: 880px;
   margin: 40px auto 67px auto;
-
 }
 
 @media (max-width:564px) {
@@ -66,9 +57,6 @@
     margin-bottom: 48px;
   }
 }
-
-
-
 
 .profile {
   display: flex;
@@ -83,7 +71,6 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 36px;
-
   }
 }
 
@@ -98,7 +85,6 @@
   gap: 30px;
   justify-content: center;
   align-items: center;
-
 }
 
 @media (max-width:564px) {
@@ -113,7 +99,6 @@
   }
 }
 
-
 .profile__photo {
   display: block;
   width: 120px;
@@ -121,14 +106,12 @@
   border-radius: 50%;
   border: solid 1px green;
   text-align: center;
-
 }
 
 .profile__info {
   display: block;
   box-sizing: border-box;
   max-width: 548px;
-
 }
 
 @media (max-width:880px) {
@@ -142,7 +125,6 @@
     max-width: 282px;
   }
 }
-
 
 .profile__string-and-button {
   display: flex;
@@ -159,9 +141,8 @@
   }
 }
 
-
 .profile__name {
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   font-size: 42px;
   font-weight: 500;
   line-height: 48px;
@@ -173,8 +154,6 @@
   white-space: nowrap;
   overflow: hidden;
   max-width: 507px;
-
-
 }
 
 @media (max-width:880px) {
@@ -192,10 +171,8 @@
   }
 }
 
-
-
 .profile__description {
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 22px;
@@ -207,7 +184,6 @@
   white-space: nowrap;
   overflow: hidden;
   max-width: 548px;
-
 }
 
 @media (max-width:880px) {
@@ -215,8 +191,6 @@
     max-width: calc(100vw - 382px)
   }
 }
-
-
 
 @media (max-width:564px) {
   .profile__description {
@@ -226,10 +200,8 @@
     font-weight: 400;
     line-height: 17px;
     text-align: center;
-
   }
 }
-
 
 .profile__button-edit {
   display: flex;
@@ -240,7 +212,6 @@
   border: 1px solid #FFFFFF;
   box-sizing: border-box;
   background: #000000;
-
 }
 
 .profile__button-edit:hover {
@@ -255,15 +226,14 @@
   }
 }
 
-
-.profile__button-edit__img {
+.profile__button-edit-img {
   display: block;
   width: 10px;
   height: 10px;
 }
 
 @media (max-width:564px) {
-  .profile__button-edit__img {
+  .profile__button-edit-img {
     width: 7.5px;
     height: 7.5px;
   }
@@ -276,7 +246,6 @@
   border-radius: 2px;
   background: #000000;
   box-sizing: border-box;
-
 }
 
 @media (max-width:564px) {
@@ -289,7 +258,6 @@
   opacity: 0.6;
   transition: opacity 100ms ease-in;
 }
-
 
 .profile__button-add-img {
   width: 22px;
@@ -317,7 +285,6 @@
   gap: 20px 17px;
   justify-content: center;
   align-items: center;
-
 }
 
 .card {
@@ -326,11 +293,8 @@
   border-radius: 10px;
   background: #FFFFFF;
   color: rgba(0, 0, 0, 1);
-
-
   box-sizing: border-box;
   overflow: hidden;
-
 }
 
 .card__photo {
@@ -339,7 +303,6 @@
   height: 282px;
   margin: 0;
   padding: 0;
-
 }
 
 .card__description {
@@ -349,14 +312,12 @@
   padding: 0;
   align-items: center;
   justify-content: space-between;
-
-
 }
 
 .card__name {
   margin: 0;
   padding: 0;
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   font-size: 24px;
   font-weight: 900;
   line-height: 29px;
@@ -379,27 +340,18 @@
 }
 
 .card__button-like {
-
-
   position: absolute;
   width: 1px;
   height: 1px;
   opacity: 0;
-
-
-
 }
 
 .card__pseudo-check-button {
-
   height: 19px;
   width: 22px;
   background-image: url("./images/disabled-like-icon.svg");
   display: block;
 }
-
-
-
 
 .card__button-like:checked+.card__pseudo-check-button {
   background-image: url("./images/active-like-icon.svg");
@@ -407,9 +359,7 @@
 
 .card__button-like:disabled+.card__pseudo-check-button {
   background-image: url("./images/disabled-like-icon.svg");
-
 }
-
 
 .card__button-like:focus+.form__pseudo-item_type_checkbox {
   opacity: 0.5;
@@ -424,8 +374,6 @@
   left: 0;
   z-index: 2;
   color: #000000;
-
-
 }
 
 .popap_opened {
@@ -451,17 +399,14 @@
     height: 322px;
     margin: calc(37vh - 141px) auto;
     padding: 25px 0 25px 0;
-
   }
-
 }
 
 .popap__header {
-
   margin: 0 auto;
   padding: 0;
   width: 358px;
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
@@ -475,7 +420,6 @@
     line-height: 22px;
     letter-spacing: 0em;
     text-align: left;
-
   }
 }
 
@@ -486,7 +430,7 @@
   width: 358px;
   min-height: 27px;
   box-sizing: border-box;
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
@@ -495,7 +439,6 @@
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   color: #000000;
-
 }
 
 @media (max-width:564px) {
@@ -505,7 +448,6 @@
   }
 }
 
-
 .popap__description {
   display: block;
   margin: 31px auto 48px auto;
@@ -513,7 +455,7 @@
   width: 358px;
   min-height: 27px;
   box-sizing: border-box;
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
@@ -522,7 +464,6 @@
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   color: #000000;
-
 }
 
 @media (max-width:564px) {
@@ -532,14 +473,13 @@
   }
 }
 
-
 .popap__button-save {
   display: block;
   margin: 0 auto 48px auto;
   padding: 0;
   width: 358px;
   min-height: 50px;
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 22px;
@@ -554,12 +494,11 @@
   .popap__button-save {
     width: 238px;
     margin: 0 auto 25px auto;
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0em;
     text-align: center;
-
   }
 }
 
@@ -583,7 +522,6 @@
   .popap__button-close {
     right: 0;
     top: -36px;
-
   }
 }
 
@@ -598,9 +536,7 @@
   margin: 0;
   width: 32px;
   height: 32px;
-
   border: none;
-
 }
 
 @media (max-width:564px) {
@@ -613,21 +549,19 @@
 .footer {
   max-width: 880px;
   margin: 0 auto;
-
   padding: 0 0 60px 0;
 }
 
 .footer__text {
   margin: 0;
   padding: 0;
-  font-family: Inter;
+  font-family: 'Inter', sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 22px;
   letter-spacing: 0em;
   text-align: left;
   color: rgba(84, 84, 84, 1);
-
 }
 
 @media (max-width:564px) {
@@ -639,5 +573,4 @@
   .footer {
     padding-bottom: 36px;
   }
-
 }
