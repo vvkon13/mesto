@@ -243,12 +243,18 @@
 
 }
 
+.profile__button-edit:hover {
+  opacity: 0.6;
+  transition: opacity 100ms ease-in;
+}
+
 @media (max-width:564px) {
   .profile__button-edit {
     width: 18px;
     height: 18px;
   }
 }
+
 
 .profile__button-edit__img {
   display: block;
@@ -278,6 +284,12 @@
     min-width: 282px;
   }
 }
+
+.profile__button-add:hover {
+  opacity: 0.6;
+  transition: opacity 100ms ease-in;
+}
+
 
 .profile__button-add-img {
   width: 22px;
@@ -359,6 +371,11 @@
   height: 19px;
   width: 22px;
   position: relative;
+}
+
+.card__button-wraper:hover {
+  opacity: 0.6;
+  transition: opacity 100ms ease-in;
 }
 
 .card__button-like {
@@ -546,6 +563,10 @@
   }
 }
 
+.popap__button-save:hover {
+  opacity: 0.8;
+  transition: opacity 100ms ease-in;
+}
 
 .popap__button-close {
   position: absolute;
@@ -564,6 +585,11 @@
     top: -36px;
 
   }
+}
+
+.popap__button-close:hover {
+  opacity: 0.6;
+  transition: opacity 100ms ease-in;
 }
 
 .popap__img-tigger {
