@@ -1,4 +1,4 @@
-let editbutton = document.querySelector ('.profile__button-change');
+let editbutton = document.querySelector ('.profile__button-edit');
 let closebutton = document.querySelector ('.popap__button-close');
 let saveclosebutton = document.querySelector ('.popap__button-save');
 
@@ -12,7 +12,7 @@ function CallPopap () {
     popapname.value = profile__name.textContent;
     popap__description.value = profile__description.textContent;
     popapview.className = 'popap popap_opened';
-  
+
 
 }
 function ClosePopap () {
