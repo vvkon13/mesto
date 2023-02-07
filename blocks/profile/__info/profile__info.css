@@ -6,7 +6,7 @@
 
 @media (max-width:880px) {
   .profile__info {
-    max-width: calc(100vw - 382px)
+    max-width: calc(100vw - 382px);
   }
 }
 
