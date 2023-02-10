@@ -12,6 +12,7 @@
 .profile__button-edit:hover {
   opacity: 0.6;
   transition: opacity 100ms ease-in;
+  cursor: pointer;
 }
 
 @media (max-width:564px) {

@@ -1,6 +1,6 @@
 .card__description {
   display: flex;
-  width: 246px;
+  max-width: 246px;
   margin: 21px auto 0 auto;
   padding: 0;
   align-items: center;

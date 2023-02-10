@@ -1,39 +1,39 @@
 let editbutton = document.querySelector('.profile__button-edit');
-let closebutton = document.querySelector('.popap__button-close');
-let saveclosebutton = document.querySelector('.popap__button-save');
+let closebutton = document.querySelector('.popup__button-close');
+let saveclosebutton = document.querySelector('.popup__button-save');
 
-function CallPopap() {
-  let popapview = document.querySelector('.popap');
-  let popapname = document.querySelector('.popap__name');
-  let popap__description = document.querySelector('.popap__description');
+function Callpopup() {
+  let popupview = document.querySelector('.popup');
+  let popupname = document.querySelector('.popup__name');
+  let popup__description = document.querySelector('.popup__description');
   let profile__name = document.querySelector('.profile__name');
   let profile__description = document.querySelector('.profile__description');
-  popapname.value = profile__name.textContent;
-  popap__description.value = profile__description.textContent;
-  popapview.className = 'popap popap_opened';
+  popupname.value = profile__name.textContent;
+  popup__description.value = profile__description.textContent;
+  popupview.className = 'popup popup_opened';
 }
 
-function ClosePopap() {
-  let popapview = document.querySelector('.popap');
-  popapview.className = 'popap';
+function Closepopup() {
+  let popupview = document.querySelector('.popup');
+  popupview.className = 'popup';
 }
 
-function SavePopap() {
-  let popapview = document.querySelector('.popap');
-  let popapname = document.querySelector('.popap__name');
-  let popap__description = document.querySelector('.popap__description');
+function Savepopup() {
+  let popupview = document.querySelector('.popup');
+  let popupname = document.querySelector('.popup__name');
+  let popup__description = document.querySelector('.popup__description');
   let profile__name = document.querySelector('.profile__name');
   let profile__description = document.querySelector('.profile__description');
-  profile__name.textContent = popapname.value;
-  profile__description.textContent = popap__description.value;
+  profile__name.textContent = popupname.value;
+  profile__description.textContent = popup__description.value;
 }
 
 function SaveAndClosePoppap() {
-  SavePopap();
-  ClosePopap();
+  Savepopup();
+  Closepopup();
 }
 
 
-editbutton.addEventListener('click', CallPopap);
-closebutton.addEventListener('click', ClosePopap);
+editbutton.addEventListener('click', Callpopup);
+closebutton.addEventListener('click', Closepopup);
 saveclosebutton.addEventListener('click', SaveAndClosePoppap);

@@ -1,4 +1,4 @@
-.popap__img-tigger {
+.popup__img-tigger {
   display: block;
   padding: 0;
   margin: 0;
@@ -8,7 +8,7 @@
 }
 
 @media (max-width:564px) {
-  .popap__img-tigger {
+  .popup__img-tigger {
     width: 20px;
     height: 20px;
   }

@@ -1,8 +1,8 @@
-.popap__header {
+.popup__header {
   margin: 0 auto;
   padding: 0;
-  width: 358px;
-  font-family: 'Inter', sans-serif;
+  width: 100%;
+  font-family: 'Inter', 'Arial' sans-serif;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
@@ -10,8 +10,7 @@
 }
 
 @media (max-width:564px) {
-  .popap__header {
-    width: 238px;
+  .popup__header {
     font-size: 18px;
     line-height: 22px;
     letter-spacing: 0em;
