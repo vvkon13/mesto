@@ -6,7 +6,7 @@ let popupName = document.querySelector('.popup__input_name');
 let popupDescription = document.querySelector('.popup__input_description');
 let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
-let likesofpage = document.getElementsByClassName ('card__button-like');
+let likesofpage = document.getElementsByClassName('card__button-like');
 
 
 function callpopup() {
