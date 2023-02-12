@@ -1,0 +1,9 @@
+.popup__input_type_description {
+  margin: 30px auto 48px auto;
+}
+
+@media (max-width:564px) {
+  .popup__input_type_description {
+    margin: 30px auto 45px auto;
+  }
+}
