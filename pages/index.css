@@ -36,3 +36,29 @@
 @import url(../blocks/popup/__button-close/popup__button-close.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__text/footer__text.css);
+
+.popup__image {
+  max-width: 75vw;
+  max-height: 75vh;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.popup__description {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  background-color: transparent;
+  padding: 10 0 0 0;
+  margin: 0;
+  color: #FFFFFF;
+}
+
+.popup__container-image {
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
