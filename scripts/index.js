@@ -6,6 +6,7 @@ const popupView = document.querySelector('.popup');
 const popupHeader = document.querySelector('.popup__header');
 const popupName = document.querySelector('.popup__input_type_name');
 const popupDescription = document.querySelector('.popup__input_type_description');
+const popupButtonText = document.querySelector('.popup__button-save');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const itemListWrapper = document.querySelector('.elements');
@@ -43,7 +44,8 @@ function callPopup(evt) {
     popupName.value = profileName.textContent;
     popupName.placeholder = 'Имя'
     popupDescription.value = profileDescription.textContent;
-    popupDescription.placeholder = 'О себе'
+    popupDescription.placeholder = 'О себе';
+    popupButtonText.textContent = 'Сохранить';
   }
   else {
     popupHeader.textContent = 'Новое место';
@@ -51,6 +53,7 @@ function callPopup(evt) {
     popupName.placeholder = 'Название';
     popupDescription.value = '';
     popupDescription.placeholder = 'Ссылка на картинку';
+    popupButtonText.textContent = 'Создать';
   }
   popupView.classList.add('popup_opened');
 }
@@ -94,6 +97,7 @@ const getItemElement = (card) => {
   like.addEventListener('click', clickLike);
   const trash = newItemElement.querySelector('.card__button-remove');
   trash.addEventListener('click', removeCard);
+
   return newItemElement;
 }
 
