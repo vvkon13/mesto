@@ -9,6 +9,7 @@
   background-origin: content-box;
   background-size: 22px 19px;
   border: none;
+  z-index: 1;
 }
 
 .card__button-like:hover {

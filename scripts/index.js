@@ -67,7 +67,7 @@ function savePopup(evt) {
   }
   else {
     let i = initialCards.length;
-    let cardRecordable = {name: popupName.value, link: popupDescription.value};
+    let cardRecordable = { name: popupName.value, link: popupDescription.value };
     renderItem(itemListWrapper, cardRecordable);
   }
   closePopup();
@@ -75,6 +75,12 @@ function savePopup(evt) {
 
 function clickLike() {
   this.classList.toggle('card__button-like_active');
+}
+
+function removeCard(evt) {
+  const card = evt.target.closest('.card');
+  card.remove();
+
 }
 
 const getItemElement = (card) => {
@@ -86,6 +92,8 @@ const getItemElement = (card) => {
   newItemImage.alt = `Фото ${card.name}`;
   const like = newItemElement.querySelector('.card__button-like');
   like.addEventListener('click', clickLike);
+  const trash = newItemElement.querySelector('.card__button-remove');
+  trash.addEventListener('click', removeCard);
   return newItemElement;
 }
 
