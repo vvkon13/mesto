@@ -1,20 +1,13 @@
 const buttonEdit = document.querySelector('.profile__button-edit');
 const buttonNewPlace = document.querySelector('.profile__button-add');
-/* const buttonClose = document.querySelector('.popup__button-close');
- */const popupView = document.querySelector('.popup');
-
-/* const popupHeader = document.querySelector('.popup__header');
-const popupName = document.querySelector('.popup__input_type_name');
-const popupDescription = document.querySelector('.popup__input_type_description');
-const popupButtonText = document.querySelector('.popup__button-save');
- */const popupWrapper = document.querySelector('.popup');
+const popupView = document.querySelector('.popup');
+const popupWrapper = document.querySelector('.popup');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const itemListWrapper = document.querySelector('.elements');
 const templateCard = document.getElementById('card');
 const templateImage = document.getElementById('popup-image');
 const templateForm = document.getElementById('popup-form');
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -43,7 +36,6 @@ const initialCards = [
 ];
 
 function callPopup(evt) {
-
   if (evt.target.classList.contains('card__photo')) {
     const newItemElement = templateImage.content.cloneNode(true);
     const newItemImage = newItemElement.querySelector('.popup__image');
@@ -65,7 +57,6 @@ function callPopup(evt) {
     const popupButtonText = newItemElement.querySelector('.popup__button-save');
     const buttonClose = newItemElement.querySelector('.popup__button-close');
     buttonClose.addEventListener('click', closePopup);
-
     if (evt.target.classList.contains('profile__button-edit')) {
       popupHeader.textContent = 'Редактировать профиль';
       popupName.value = profileName.textContent;
@@ -84,7 +75,6 @@ function callPopup(evt) {
     popupWrapper.prepend(newItemElement);
     const formChangeProfile = document.forms['popup-profile'];
     formChangeProfile.addEventListener('submit', savePopup);
-
   }
   popupView.classList.add('popup_opened');
 }
@@ -125,7 +115,6 @@ function clickLike() {
 function removeCard(evt) {
   const card = evt.target.closest('.card');
   card.remove();
-
 }
 
 const getItemElement = (card) => {
@@ -148,11 +137,10 @@ const renderItem = (wrap, card) => {
   wrap.prepend(getItemElement(card))
 }
 
+
 initialCards.forEach((card) => {
   renderItem(itemListWrapper, card)
 })
-
-
 buttonEdit.addEventListener('click', callPopup);
 buttonNewPlace.addEventListener('click', callPopup);
 

@@ -8,3 +8,8 @@
   z-index: 1;
 }
 
+.card__photo:hover {
+  opacity: 0.9;
+  transition: opacity 100ms ease-in;
+  cursor: pointer;
+}
