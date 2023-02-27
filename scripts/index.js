@@ -25,10 +25,7 @@ function callPopup(evt) {
     popupImageImage.src = evt.target.src;
     popupImageImage.alt = evt.target.alt;
     const cardParentCall = evt.target.closest('.card');
-    console.log(cardParentCall);
     const descriptionCardParentCall = cardParentCall.querySelector('.card__description');
-    console.log(descriptionCardParentCall);
-    console.log(descriptionCardParentCall.textContent);
     popupImageDescription.textContent = descriptionCardParentCall.textContent;
     popupImageWrapper.classList.add('popup_opened');
   }
