@@ -47,13 +47,26 @@
     <section class="popup popup_type_profile">
       <div class="popup__container">
         <form name="popup-profile">
-          <h2 class="popup__header"></h2>
+          <h2 class="popup__header">Редактировать профиль</h2>
           <input type="text" placeholder="Имя" class="popup__input popup__input_type_name" name="popup-name">
           <input type="text" placeholder="О себе" class="popup__input popup__input_type_description"
             name="popup-description">
-          <button class="popup__button-save" type="submit"></button>
+          <button class="popup__button-save" type="submit" id="button-save-profile">Сохранить</button>
         </form>
         <button class="popup__button-close" type="button" id="button-close-profile"></button>
+      </div>
+    </section>
+
+    <section class="popup popup_type_card">
+      <div class="popup__container">
+        <form name="popup-card">
+          <h2 class="popup__header">Новое место</h2>
+          <input type="text" placeholder="Название" class="popup__input popup__input_type_name" name="popup-card-title">
+          <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_type_description"
+            name="popup-card-link">
+          <button class="popup__button-save" type="submit" id="button-save-card">Создать</button>
+        </form>
+        <button class="popup__button-close" type="button" id="button-close-card"></button>
       </div>
     </section>
 
