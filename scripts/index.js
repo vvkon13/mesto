@@ -25,16 +25,20 @@ const formPopupCard = document.querySelector('[name="popup-card"]');
 const itemListWrapper = document.querySelector('.elements');
 const templateCard = document.getElementById('card');
 
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
+
 function callPopupProfile(evt) {
   popupProfileName.value = profileName.textContent;
   popupProfileDescription.value = profileDescription.textContent;
-  popupProfileWrapper.classList.add('popup_opened');
+  openPopup(popupProfileWrapper);
 }
 
 function callPopupCard(evt) {
   popupCardTitle.value = '';
   popupCardLink.value = '';
-  popupCardWrapper.classList.add('popup_opened');
+  openPopup(popupCardWrapper);
 }
 
 function callPopupImage(evt) {
@@ -43,21 +47,21 @@ function callPopupImage(evt) {
   const cardParentCall = evt.target.closest('.card');
   const descriptionCardParentCall = cardParentCall.querySelector('.card__description');
   popupImageDescription.textContent = descriptionCardParentCall.textContent;
-  popupImageWrapper.classList.add('popup_opened');
+  openPopup(popupImageWrapper);
 }
 
 function savePopupProfile(evt) {
   evt.preventDefault();
   profileName.textContent = popupProfileName.value;
   profileDescription.textContent = popupProfileDescription.value;
-  popupProfileWrapper.classList.remove('popup_opened');
+  closePopup(popupProfileWrapper);
 }
 
 function savePopupCard(evt) {
   evt.preventDefault();
   const cardRecordable = { name: popupCardTitle.value, link: popupCardLink.value };
   renderItem(itemListWrapper, cardRecordable);
-  popupCardWrapper.classList.remove('popup_opened');
+  closePopup(popupCardWrapper);
 }
 
 function clickLike() {
