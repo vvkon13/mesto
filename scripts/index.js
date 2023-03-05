@@ -25,6 +25,16 @@ const formPopupCard = document.querySelector('[name="popup-card"]');
 const itemListWrapper = document.querySelector('.elements');
 const templateCard = document.getElementById('card');
 
+const validationOptions = {
+  form: {},
+  submitSelector: '.popup__button-save',
+  inputSelector: '.popup__input',
+  inputSelectorClass: 'popup__input_visually-erroneous',
+  inputErrorSelector: '.popup__input-error',
+  inputErrorClass: 'popup__input-error_active',
+  disabledButtonClass: 'popup__button-save_inactive',
+};
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
@@ -32,12 +42,16 @@ function openPopup(popup) {
 function callPopupProfile(evt) {
   popupProfileName.value = profileName.textContent;
   popupProfileDescription.value = profileDescription.textContent;
+  validationOptions.form = formPopupProfile;
+  enableValidation(validationOptions);
   openPopup(popupProfileWrapper);
 }
 
 function callPopupCard(evt) {
   popupCardTitle.value = '';
   popupCardLink.value = '';
+  validationOptions.form = formPopupCard;
+  enableValidation(validationOptions);
   openPopup(popupCardWrapper);
 }
 
@@ -94,6 +108,7 @@ const renderItem = (wrap, card) => {
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  disableValidation(validationOptions);
 }
 
 initialCards.forEach((card) => {

@@ -33,6 +33,7 @@
 @import url(../blocks/popup/__input/_type/popup__input_type_name.css);
 @import url(../blocks/popup/__input/_type/popup__input_type_description.css);
 @import url(../blocks/popup/__button-save/popup__button-save.css);
+@import url(../blocks/popup/__button-save/_inactive/popup__button-save_inactive.css);
 @import url(../blocks/popup/__button-close/popup__button-close.css);
 @import url(../blocks/popup/__image/popup__image.css);
 @import url(../blocks/popup/__description/popup__description.css);
@@ -43,3 +44,26 @@
 @import url(../blocks/popup/_type/popup_type_place.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__text/footer__text.css);
+
+.popup__input-error {
+  display: inline-block;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 10px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: rgba(255, 0, 0);
+  opacity: 0;
+  min-height: 25px;
+  margin: 5px 0 0 0;
+  padding: 0;
+}
+
+.popup__input-error_active {
+  opacity: 1;
+}
+
+.popup__input_visually-erroneous {
+  border-bottom: 1px solid #FF0000;
+}
