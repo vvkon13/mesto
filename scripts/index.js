@@ -26,7 +26,9 @@ const itemListWrapper = document.querySelector('.elements');
 const templateCard = document.getElementById('card');
 
 const validationOptions = {
-  form: {}, // formPopupProfile или formPopupCard в зависимости от открытого popup
+  form: {},
+  // formPopupProfile или formPopupCard в зависимости от открытого popup или {} если
+  // popup закрыт или открыт popup c картинкой
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button-save',
   inactiveButtonClass: 'popup__button-save_inactive',
@@ -137,7 +139,7 @@ initialCards.forEach((card) => {
 
 buttonEdit.addEventListener('click', callPopupProfile);
 buttonNewPlace.addEventListener('click', callPopupCard);
-buttonCloseProfile.addEventListener('click',closePopupForm.bind(this, popupProfileWrapper));
+buttonCloseProfile.addEventListener('click', closePopupForm.bind(this, popupProfileWrapper));
 buttonCloseCard.addEventListener('click', closePopupForm.bind(this, popupCardWrapper));
 buttonCloseImage.addEventListener('click', closePopup.bind(this, popupImageWrapper));
 formPopupProfile.addEventListener('submit', savePopupProfile);

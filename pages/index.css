@@ -42,28 +42,7 @@
 @import url(../blocks/popup/_type/popup_type_image.css);
 @import url(../blocks/popup/_type/popup_type_profile.css);
 @import url(../blocks/popup/_type/popup_type_place.css);
+@import url(../blocks/popup/__input-error/popup__input-error.css);
+@import url(../blocks/popup/__input-error/_active/popup__input-error_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__text/footer__text.css);
-
-.popup__input-error {
-  display: inline-block;
-  font-family: 'Inter', 'Arial', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 10px;
-  letter-spacing: 0em;
-  text-align: left;
-  color: rgba(255, 0, 0);
-  opacity: 0;
-  min-height: 25px;
-  margin: 5px 0 0 0;
-  padding: 0;
-}
-
-.popup__input-error_active {
-  opacity: 1;
-}
-
-.popup__input_visually-erroneous {
-  border-bottom: 1px solid #FF0000;
-}
