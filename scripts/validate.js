@@ -10,8 +10,8 @@ const showInputErrorStatus = (inputElement, inputErrorClass, errorElement, messa
   errorElement.classList.add(errorClass);
 };
 
-const toggleInputStatus = (inputElement, options) => {
-  const errorElement = options.form.querySelector(`#${inputElement.id}-error`);
+const toggleInputStatus = (inputElement, options, formInstance) => {
+  const errorElement = formInstance.querySelector(`#${inputElement.id}-error`);
   if (inputElement.validity.valid) {
     hiddenInputErrorStatus(inputElement, options.inputErrorClass, errorElement, options.errorClass);
   } else {
@@ -38,28 +38,42 @@ const toggleButtonStatus = (inputs, submitElement, inactiveButtonClass) => {
   }
 };
 
-const enableValidation = (options) => {
-  const submitElement = options.form.querySelector(options.submitButtonSelector);
-  const inputs = Array.from(options.form.querySelectorAll(options.inputSelector));
+const enableValidationFormInstance = (options, form) => {
+  const formInstance = form;
+  const submitElement = formInstance.querySelector(options.submitButtonSelector);
+  const inputs = Array.from(formInstance.querySelectorAll(options.inputSelector));
+  console.log(inputs);
   inputs.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      toggleInputStatus(inputElement, options);
+      toggleInputStatus(inputElement, options, formInstance);
       toggleButtonStatus(inputs, submitElement, options.inactiveButtonClass);
     });
   });
   toggleButtonStatus(inputs, submitElement, options.inactiveButtonClass);
 };
 
-const disableValidation = (options) => {
-  const submitElement = options.form.querySelector(options.submitButtonSelector);
-  const inputs = Array.from(options.form.querySelectorAll(options.inputSelector));
+const enableValidationForms = (options) => {
+  const forms = Array.from(document.forms);
+  forms.forEach((formInstance) => {
+    enableValidationFormInstance(options, formInstance);
+  });
+};
+
+const checkingErrorForm = (formInstance, options) => {
+  const submitElement = formInstance.querySelector(options.submitButtonSelector);
+  const inputs = Array.from(formInstance.querySelectorAll(options.inputSelector));
   inputs.forEach((inputElement) => {
-    const errorElement = options.form.querySelector(`#${inputElement.id}-error`);
-    inputElement.removeEventListener('input', () => {
-      toggleInputStatus(inputElement, options);
-      toggleButtonStatus(inputs, submitElement, options.inactiveButtonClass);
-    });
+    toggleInputStatus(inputElement, options, formInstance);
+  });
+  toggleButtonStatus(inputs, submitElement, options.inactiveButtonClass);
+}
+
+const clearingErrorsFromScreenForm = (formInstance, options) => {
+  const inputs = Array.from(formInstance.querySelectorAll(options.inputSelector));
+  inputs.forEach((inputElement) => {
+    const errorElement = formInstance.querySelector(`#${inputElement.id}-error`);
     hiddenInputErrorStatus(inputElement, options.inputErrorClass, errorElement, options.errorClass);
   });
-  options.form = {};
-};
+}
+
+
