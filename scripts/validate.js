@@ -42,7 +42,6 @@ const enableValidationFormInstance = (options, form) => {
   const formInstance = form;
   const submitElement = formInstance.querySelector(options.submitButtonSelector);
   const inputs = Array.from(formInstance.querySelectorAll(options.inputSelector));
-  console.log(inputs);
   inputs.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       toggleInputStatus(inputElement, options, formInstance);
