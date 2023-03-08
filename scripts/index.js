@@ -32,13 +32,14 @@ const validationOptions = {
 
 function handlerСlosePopupIfKeyEscape(evt) {
   if ((evt.key) === 'Escape') {
-    closePopup(this);
-  };
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
 };
 
 function openPopup(popup) {
-  window.addEventListener('keydown', handlerСlosePopupIfKeyEscape.bind(popup));
   popup.classList.add('popup_opened');
+  window.addEventListener('keydown', handlerСlosePopupIfKeyEscape);
 }
 
 function callPopupProfile(evt) {
@@ -51,6 +52,10 @@ function callPopupProfile(evt) {
 function callPopupCard(evt) {
   popupCardTitle.value = '';
   popupCardLink.value = '';
+  const formInstance = popupCardWrapper.querySelector('form');
+  clearingErrorsFromScreenForm(formInstance, validationOptions);
+  const buttonElement = popupCardWrapper.querySelector(validationOptions.submitButtonSelector);
+  disableButton(buttonElement, validationOptions.inactiveButtonClass);
   openPopup(popupCardWrapper);
 }
 
@@ -106,12 +111,8 @@ const renderItem = (wrap, card) => {
 }
 
 function closePopup(popup) {
-  const formInstance = popup.querySelector('form');
   popup.classList.remove('popup_opened');
-  window.removeEventListener('keydown', handlerСlosePopupIfKeyEscape.bind(popup));
-  if (popup !== popupImageWrapper) {
-    clearingErrorsFromScreenForm(formInstance, validationOptions)
-  }
+  window.addEventListener('keydown', handlerСlosePopupIfKeyEscape);
 }
 
 
