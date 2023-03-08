@@ -39,7 +39,7 @@ function handlerСlosePopupIfKeyEscape(evt) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  window.addEventListener('keydown', handlerСlosePopupIfKeyEscape);
+  document.addEventListener('keydown', handlerСlosePopupIfKeyEscape);
 }
 
 function callPopupProfile(evt) {
@@ -52,10 +52,11 @@ function callPopupProfile(evt) {
 function callPopupCard(evt) {
   popupCardTitle.value = '';
   popupCardLink.value = '';
-  const formInstance = popupCardWrapper.querySelector('form');
-  clearingErrorsFromScreenForm(formInstance, validationOptions);
+  // inputs - пустые деактивируем кнопку
   const buttonElement = popupCardWrapper.querySelector(validationOptions.submitButtonSelector);
   disableButton(buttonElement, validationOptions.inactiveButtonClass);
+  const formInstance = popupCardWrapper.querySelector('form');
+  clearingErrorsFromScreenForm(formInstance, validationOptions);
   openPopup(popupCardWrapper);
 }
 
@@ -111,8 +112,8 @@ const renderItem = (wrap, card) => {
 }
 
 function closePopup(popup) {
+  document.removeEventListener('keydown', handlerСlosePopupIfKeyEscape);
   popup.classList.remove('popup_opened');
-  window.addEventListener('keydown', handlerСlosePopupIfKeyEscape);
 }
 
 
