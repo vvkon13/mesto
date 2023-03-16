@@ -30,6 +30,138 @@ const validationOptions = {
   errorClass: 'popup__input-error_active'
 };
 
+
+
+class Card {
+  constructor (name, link, selectorTemplateElement){
+    this._name = name;
+    this._link = link;
+    this._selectorTemplateElement = selectorTemplateElement;
+  }
+
+  renderItem = (wrap) => {
+    wrap.prepend(this._getItemElement())
+  }
+
+  _setEventListenerClickImage = () => {
+    this._itemImage.addEventListener('click', callPopupImage);
+  }
+
+  _setEventListenerClickLike = () => {
+    this._like.addEventListener('click', this._clickLike);
+
+  }
+
+  _setEventListenerClickTrash =() => {
+    this._trash.addEventListener('click', this._removeCard);
+  }
+  _getItemElement = () => {
+    this._element = this._selectorTemplateElement.content.cloneNode(true);
+    this._itemTitle = this._element.querySelector('.card__name');
+    this._itemTitle.textContent = this._name;
+    this._itemImage = this._element.querySelector('.card__photo');
+    this._itemImage.src = this._link;
+    this._itemImage.alt = `Фото ${this._name}`;
+    this._setEventListenerClickImage();
+    this._like = this._element.querySelector('.card__button-like');
+    this._setEventListenerClickLike();
+    this._trash = this._element.querySelector('.card__button-remove');
+    this._setEventListenerClickTrash;
+    return this._element;
+  }
+
+  _clickLike = () => {
+    this._like.classList.toggle('card__button-like_active');
+  }
+
+  _removeCard = () => {
+    this._element.remove();
+  }
+
+}
+
+class FormValidator {
+  constructor(formInstance, options) {
+    this._formInstance = formInstance;
+    this._options = options;
+  }
+  enableValidationFormInstance = () => {
+    this._submitElement = this._formInstance.querySelector(options.submitButtonSelector);
+    this._inputs = Array.from(formInstance.querySelectorAll(options.inputSelector));
+    this._inputs.forEach((inputElement) => {
+      inputElement.addEventListener('input', () => {
+        this._toggleInputStatus(inputElement);
+        this._toggleButtonStatus();
+      });
+    });
+    this._toggleButtonStatus();
+  };
+
+  _toggleButtonStatus = () => {
+    const formValidity = this._inputs.every(inputElement => inputElement.validity.valid);
+    if (formValidity) {
+      enableButton();
+    } else {
+      disableButton();
+    }
+  };
+
+  _disableButton = () => {
+    this._submitElement.setAttribute('disabled', 'on');
+    this._submitElement.classList.add(this._options.inactiveButtonClass);
+  };
+
+  _enableButton = () => {
+    this._submitElement.removeAttribute('disabled');
+    this._submitElement.classList.remove(this._options.inactiveButtonClass);
+  };
+
+  _toggleInputStatus = (inputElement) => {
+    const errorElement = this._formInstance.querySelector(`#${inputElement.id}-error`);
+    if (inputElement.validity.valid) {
+      this._hiddenInputErrorStatus(inputElement,errorElement);
+    } else {
+      this._showInputErrorStatus(inputElement,errorElement);
+    }
+  };
+
+  _showInputErrorStatus = (inputElement, errorElement) => {
+    errorElement.textContent = inputElement.validationMessage;
+    inputElement.classList.add(this._options.inputErrorClass);
+    errorElement.classList.add(this._options.errorClass);
+  };
+
+  _hiddenInputErrorStatus = (inputElement, errorElement) => {
+    errorElement.textContent = '';
+    inputElement.classList.remove(this._options.inputErrorClass);
+    errorElement.classList.remove(this._options.errorClass);
+  };
+
+  _checkingErrorForm = () => {
+    this._inputs.forEach((inputElement) => {
+      this._toggleInputStatus(inputElement);
+    });
+    this._toggleButtonStatus();
+  }
+
+  _clearingErrorsFromScreenForm = () => {
+    this._inputs.forEach((inputElement) => {
+      const errorElement = this._formInstance.querySelector(`#${inputElement.id}-error`);
+      this._hiddenInputErrorStatus(inputElement, errorElement);
+    });
+  }
+
+
+
+
+}
+
+
+
+
+
+
+
 function handlerСlosePopupIfKeyEscape(evt) {
   if ((evt.key) === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
@@ -83,7 +215,7 @@ function savePopupCard(evt) {
   closePopup(popupCardWrapper);
 }
 
-function clickLike() {
+/* function clickLike() {
   this.classList.toggle('card__button-like_active');
 }
 
@@ -91,8 +223,8 @@ function removeCard(evt) {
   const card = evt.target.closest('.card');
   card.remove();
 }
-
-const getItemElement = (card) => {
+ */
+/* const getItemElement = (card) => {
   const newItemElement = templateCard.content.cloneNode(true);
   const newItemTitle = newItemElement.querySelector('.card__name');
   newItemTitle.textContent = card.name;
@@ -106,10 +238,11 @@ const getItemElement = (card) => {
   trash.addEventListener('click', removeCard);
   return newItemElement;
 }
-
-const renderItem = (wrap, card) => {
+ */
+/* const renderItem = (wrap, card) => {
   wrap.prepend(getItemElement(card))
 }
+ */
 
 function closePopup(popup) {
   document.removeEventListener('keydown', handlerСlosePopupIfKeyEscape);
@@ -118,8 +251,10 @@ function closePopup(popup) {
 
 
 initialCards.forEach((card) => {
-  renderItem(itemListWrapper, card)
+  const cardElement = new Card (card.name, card.link, templateCard);
+  cardElement.renderItem(itemListWrapper);
 });
+
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
