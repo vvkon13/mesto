@@ -1,4 +1,6 @@
 import Card from './Card.js';
+// Какой-то глюк. На компьютере название файла с большой буквы Card.js на ГитХаб с маленькой card.js
+// Уже переименовывал. Удалял и новый файл делал. Все равно так. Не пойму что это.
 
 const popupProfileWrapper = document.querySelector('.popup_type_profile');
 const popupCardWrapper = document.querySelector('.popup_type_card');

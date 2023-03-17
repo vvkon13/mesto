@@ -1,6 +1,7 @@
 import { callPopupImage } from "./popups.js";
 
-
+// Какой-то глюк. На компьютере название файла с большой буквы Card.js на ГитХаб с маленькой card.js
+// Уже переименовывал. Удалял и новый файл делал. Все равно так. Не пойму что это.
 class Card {
   constructor(name, link, selectorTemplateElement) {
     this._name = name;
