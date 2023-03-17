@@ -1,5 +1,6 @@
 import { callPopupImage } from "./popups.js";
 
+
 class Card {
   constructor(name, link, selectorTemplateElement) {
     this._name = name;
@@ -43,4 +44,6 @@ class Card {
   }
 }
 
+
 export default Card;
+

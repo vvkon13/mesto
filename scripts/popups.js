@@ -86,5 +86,5 @@ const renderItem = (wrap, cardElement) => {
   wrap.prepend(cardElement);
 };
 
-
 export { closePopup, callPopupProfile, callPopupCard, savePopupProfile, savePopupCard, formPopupProfile, formPopupCard, callPopupImage, arrayFormControllers, generateCard }
+

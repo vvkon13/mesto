@@ -45,3 +45,4 @@ buttonEdit.addEventListener('click', callPopupProfile);
 buttonNewPlace.addEventListener('click', callPopupCard);
 formPopupProfile.addEventListener('submit', savePopupProfile);
 formPopupCard.addEventListener('submit', savePopupCard);
+
