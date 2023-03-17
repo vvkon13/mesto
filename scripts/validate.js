@@ -1,78 +1,94 @@
-const hiddenInputErrorStatus = (inputElement, inputErrorClass, errorElement, errorClass) => {
-  errorElement.textContent = '';
-  inputElement.classList.remove(inputErrorClass);
-  errorElement.classList.remove(errorClass);
-};
-
-const showInputErrorStatus = (inputElement, inputErrorClass, errorElement, message, errorClass) => {
-  errorElement.textContent = message;
-  inputElement.classList.add(inputErrorClass);
-  errorElement.classList.add(errorClass);
-};
-
-const toggleInputStatus = (inputElement, options, formInstance) => {
-  const errorElement = formInstance.querySelector(`#${inputElement.id}-error`);
-  if (inputElement.validity.valid) {
-    hiddenInputErrorStatus(inputElement, options.inputErrorClass, errorElement, options.errorClass);
-  } else {
-    showInputErrorStatus(inputElement, options.inputErrorClass, errorElement, inputElement.validationMessage, options.errorClass);
+class FormValidator {
+  constructor(formInstance, options) {
+    this._formInstance = formInstance;
+    this._options = options;
   }
-};
 
-const enableButton = (buttonElement, inactiveButtonClass) => {
-  buttonElement.removeAttribute('disabled');
-  buttonElement.classList.remove(inactiveButtonClass);
-};
-
-const disableButton = (buttonElement, inactiveButtonClass) => {
-  buttonElement.setAttribute('disabled', 'on');
-  buttonElement.classList.add(inactiveButtonClass);
-};
-
-const toggleButtonStatus = (inputs, submitElement, inactiveButtonClass) => {
-  const formValidity = inputs.every(inputElement => inputElement.validity.valid);
-  if (formValidity) {
-    enableButton(submitElement, inactiveButtonClass);
-  } else {
-    disableButton(submitElement, inactiveButtonClass);
-  }
-};
-
-const enableValidationFormInstance = (options, form) => {
-  const formInstance = form;
-  const submitElement = formInstance.querySelector(options.submitButtonSelector);
-  const inputs = Array.from(formInstance.querySelectorAll(options.inputSelector));
-  inputs.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      toggleInputStatus(inputElement, options, formInstance);
-      toggleButtonStatus(inputs, submitElement, options.inactiveButtonClass);
+  enableValidation = () => {
+    this._submitElement = this._formInstance.querySelector(this._options.submitButtonSelector);
+    this._inputs = Array.from(this._formInstance.querySelectorAll(this._options.inputSelector));
+    this._inputs.forEach((inputElement) => {
+      inputElement.addEventListener('input', () => {
+        this._toggleInputStatus(inputElement);
+        this._toggleButtonStatus();
+      });
     });
-  });
-  toggleButtonStatus(inputs, submitElement, options.inactiveButtonClass);
+    this._toggleButtonStatus();
+  };
+
+  _toggleButtonStatus = () => {
+    const formValidity = this._inputs.every(inputElement => inputElement.validity.valid);
+    if (formValidity) {
+      this._enableButton();
+    } else {
+      this._disableButton();
+    }
+  };
+
+  _disableButton = () => {
+    this._submitElement.setAttribute('disabled', 'on');
+    this._submitElement.classList.add(this._options.inactiveButtonClass);
+  };
+
+  _enableButton = () => {
+    this._submitElement.removeAttribute('disabled');
+    this._submitElement.classList.remove(this._options.inactiveButtonClass);
+  };
+
+  _toggleInputStatus = (inputElement) => {
+    const errorElement = this._formInstance.querySelector(`#${inputElement.id}-error`);
+    if (inputElement.validity.valid) {
+      this._hiddenInputErrorStatus(inputElement, errorElement);
+    } else {
+      this._showInputErrorStatus(inputElement, errorElement);
+    }
+  };
+
+  _showInputErrorStatus = (inputElement, errorElement) => {
+    errorElement.textContent = inputElement.validationMessage;
+    inputElement.classList.add(this._options.inputErrorClass);
+    errorElement.classList.add(this._options.errorClass);
+  };
+
+  _hiddenInputErrorStatus = (inputElement, errorElement) => {
+    errorElement.textContent = '';
+    inputElement.classList.remove(this._options.inputErrorClass);
+    errorElement.classList.remove(this._options.errorClass);
+  };
+
+  _checkingErrorForm = () => {
+    this._inputs.forEach((inputElement) => {
+      this._toggleInputStatus(inputElement);
+    });
+    this._toggleButtonStatus();
+  }
+
+  _clearingErrorsFromScreenForm = () => {
+    this._inputs.forEach((inputElement) => {
+      const errorElement = this._formInstance.querySelector(`#${inputElement.id}-error`);
+      this._hiddenInputErrorStatus(inputElement, errorElement);
+    });
+  }
+}
+
+let arrayFormControllers = [];
+
+const validationOptions = {
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_inactive',
+  inputErrorClass: 'popup__input_visually-erroneous',
+  errorClass: 'popup__input-error_active'
 };
 
 const enableValidationForms = (options) => {
   const forms = Array.from(document.forms);
   forms.forEach((formInstance) => {
-    enableValidationFormInstance(options, formInstance);
+    const formController = new FormValidator(formInstance, options);
+    arrayFormControllers.push(formController);
+    formController.enableValidation();
   });
 };
 
-const checkingErrorForm = (formInstance, options) => {
-  const submitElement = formInstance.querySelector(options.submitButtonSelector);
-  const inputs = Array.from(formInstance.querySelectorAll(options.inputSelector));
-  inputs.forEach((inputElement) => {
-    toggleInputStatus(inputElement, options, formInstance);
-  });
-  toggleButtonStatus(inputs, submitElement, options.inactiveButtonClass);
-}
 
-const clearingErrorsFromScreenForm = (formInstance, options) => {
-  const inputs = Array.from(formInstance.querySelectorAll(options.inputSelector));
-  inputs.forEach((inputElement) => {
-    const errorElement = formInstance.querySelector(`#${inputElement.id}-error`);
-    hiddenInputErrorStatus(inputElement, options.inputErrorClass, errorElement, options.errorClass);
-  });
-}
-
-
+export { FormValidator, arrayFormControllers, validationOptions, enableValidationForms };
