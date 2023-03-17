@@ -1,5 +1,5 @@
 import FormValidator from './FormValidator.js';
-import { initialCards } from './Cards.js';
+import { initialCards } from './arrayOfCards.js';
 import { closePopup, callPopupProfile, callPopupCard, savePopupProfile, savePopupCard, formPopupProfile, formPopupCard, arrayFormControllers, generateCard } from './popups.js'
 
 const popups = document.querySelectorAll('.popup');
