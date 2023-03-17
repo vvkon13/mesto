@@ -22,6 +22,8 @@ const formPopupCard = document.querySelector('[name="popup-card"]');
 const itemListWrapper = document.querySelector('.elements');
 const templateCard = document.getElementById('card');
 
+let arrayFormControllers = [];
+
 const validationOptions = {
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button-save',
@@ -66,7 +68,7 @@ class Card {
     this._like = this._element.querySelector('.card__button-like');
     this._setEventListenerClickLike();
     this._trash = this._element.querySelector('.card__button-remove');
-    this._setEventListenerClickTrash;
+    this._setEventListenerClickTrash();
     return this._element;
   }
 
@@ -85,9 +87,9 @@ class FormValidator {
     this._formInstance = formInstance;
     this._options = options;
   }
-  enableValidationFormInstance = () => {
-    this._submitElement = this._formInstance.querySelector(options.submitButtonSelector);
-    this._inputs = Array.from(formInstance.querySelectorAll(options.inputSelector));
+  enableValidation = () => {
+    this._submitElement = this._formInstance.querySelector(this._options.submitButtonSelector);
+    this._inputs = Array.from(this._formInstance.querySelectorAll(this._options.inputSelector));
     this._inputs.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._toggleInputStatus(inputElement);
@@ -100,9 +102,9 @@ class FormValidator {
   _toggleButtonStatus = () => {
     const formValidity = this._inputs.every(inputElement => inputElement.validity.valid);
     if (formValidity) {
-      enableButton();
+      this._enableButton();
     } else {
-      disableButton();
+      this._disableButton();
     }
   };
 
@@ -175,9 +177,10 @@ function openPopup(popup) {
 }
 
 function callPopupProfile(evt) {
+  const formController = arrayFormControllers.find(item => item._formInstance === formPopupProfile);
   popupProfileName.value = profileName.textContent;
   popupProfileDescription.value = profileDescription.textContent;
-  checkingErrorForm(formPopupProfile, validationOptions);
+  formController._checkingErrorForm();
   openPopup(popupProfileWrapper);
 }
 
@@ -185,10 +188,10 @@ function callPopupCard(evt) {
   popupCardTitle.value = '';
   popupCardLink.value = '';
   // inputs - пустые деактивируем кнопку
-  const buttonElement = popupCardWrapper.querySelector(validationOptions.submitButtonSelector);
-  disableButton(buttonElement, validationOptions.inactiveButtonClass);
-  const formInstance = popupCardWrapper.querySelector('form');
-  clearingErrorsFromScreenForm(formInstance, validationOptions);
+  // const formInstance = popupCardWrapper.querySelector('form');
+  const formController = arrayFormControllers.find(item => item._formInstance === formPopupCard);
+  formController._disableButton();
+  formController._clearingErrorsFromScreenForm();
   openPopup(popupCardWrapper);
 }
 
@@ -210,8 +213,12 @@ function savePopupProfile(evt) {
 
 function savePopupCard(evt) {
   evt.preventDefault();
-  const cardRecordable = { name: popupCardTitle.value, link: popupCardLink.value };
-  renderItem(itemListWrapper, cardRecordable);
+  // const cardRecordable = { name: popupCardTitle.value, link: popupCardLink.value };
+
+  const cardElement = new Card (popupCardTitle.value, popupCardLink.value, templateCard);
+  cardElement.renderItem(itemListWrapper);
+
+  // renderItem(itemListWrapper, cardRecordable);
   closePopup(popupCardWrapper);
 }
 
@@ -249,12 +256,20 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
+const enableValidationForms = (options) => {
+  const forms = Array.from(document.forms);
+  forms.forEach((formInstance) => {
+    const formController = new FormValidator (formInstance,options);
+    arrayFormControllers.push(formController);
+    formController.enableValidation();
+  });
+};
+
 
 initialCards.forEach((card) => {
   const cardElement = new Card (card.name, card.link, templateCard);
   cardElement.renderItem(itemListWrapper);
 });
-
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
@@ -268,6 +283,7 @@ popups.forEach((popup) => {
 });
 
 enableValidationForms(validationOptions);
+
 buttonEdit.addEventListener('click', callPopupProfile);
 buttonNewPlace.addEventListener('click', callPopupCard);
 formPopupProfile.addEventListener('submit', savePopupProfile);
