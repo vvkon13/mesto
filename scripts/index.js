@@ -25,7 +25,7 @@ const enableValidationForms = (options) => {
 
 
 initialCards.forEach((card) => {
-  generateCard(card.name,card.link);
+  generateCard(card.name, card.link);
 });
 
 popups.forEach((popup) => {
