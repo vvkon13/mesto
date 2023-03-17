@@ -1,5 +1,4 @@
-import { arrayFormControllers } from "./validate.js";
-import Card from './card.js';
+import Card from './Card.js';
 
 const popupProfileWrapper = document.querySelector('.popup_type_profile');
 const popupCardWrapper = document.querySelector('.popup_type_card');
@@ -21,6 +20,7 @@ const profileDescription = document.querySelector('.profile__description');
 const itemListWrapper = document.querySelector('.elements');
 const templateCard = document.getElementById('card');
 
+const arrayFormControllers = [];
 
 function handlerСlosePopupIfKeyEscape(evt) {
   if ((evt.key) === 'Escape') {
@@ -38,7 +38,7 @@ function callPopupProfile(evt) {
   const formController = arrayFormControllers.find(item => item._formInstance === formPopupProfile);
   popupProfileName.value = profileName.textContent;
   popupProfileDescription.value = profileDescription.textContent;
-  formController._checkingErrorForm();
+  formController.checkFormForErrors();
   openPopup(popupProfileWrapper);
 }
 
@@ -47,17 +47,15 @@ function callPopupCard(evt) {
   popupCardLink.value = '';
   // inputs - пустые деактивируем кнопку
   const formController = arrayFormControllers.find(item => item._formInstance === formPopupCard);
-  formController._disableButton();
-  formController._clearingErrorsFromScreenForm();
+  formController.disableButton();
+  formController.clearValidationErrors();
   openPopup(popupCardWrapper);
 }
 
-function callPopupImage(evt) {
-  popupImageImage.src = evt.target.src;
-  popupImageImage.alt = evt.target.alt;
-  const cardParentCall = evt.target.closest('.card');
-  const descriptionCardParentCall = cardParentCall.querySelector('.card__description');
-  popupImageDescription.textContent = descriptionCardParentCall.textContent;
+function callPopupImage(imageSrc, imageAlt, cardTitle) {
+  popupImageImage.src = imageSrc;
+  popupImageImage.alt = imageAlt;
+  popupImageDescription.textContent = cardTitle;
   openPopup(popupImageWrapper);
 }
 
@@ -68,10 +66,14 @@ function savePopupProfile(evt) {
   closePopup(popupProfileWrapper);
 }
 
+const generateCard = (cardTitle, cardLink) => {
+  const cardElement = new Card(cardTitle, cardLink, templateCard);
+  renderItem(itemListWrapper, cardElement.getItemElement());
+}
+
 function savePopupCard(evt) {
   evt.preventDefault();
-  const cardElement = new Card(popupCardTitle.value, popupCardLink.value, templateCard);
-  cardElement.renderItem(itemListWrapper);
+  generateCard(popupCardTitle.value, popupCardLink.value);
   closePopup(popupCardWrapper);
 }
 
@@ -80,4 +82,9 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-export { closePopup, callPopupProfile, callPopupCard, savePopupProfile, savePopupCard, formPopupProfile, formPopupCard, itemListWrapper, templateCard, callPopupImage }
+const renderItem = (wrap, cardElement) => {
+  wrap.prepend(cardElement);
+};
+
+
+export { closePopup, callPopupProfile, callPopupCard, savePopupProfile, savePopupCard, formPopupProfile, formPopupCard, itemListWrapper, templateCard, callPopupImage, renderItem, arrayFormControllers, generateCard }

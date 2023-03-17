@@ -1,16 +1,31 @@
-import Card from './card.js';
+import FormValidator from './FormValidator.js';
 import { initialCards } from './cards.js';
-import { validationOptions, enableValidationForms } from './validate.js';
-import { closePopup, callPopupProfile, callPopupCard, savePopupProfile, savePopupCard, formPopupProfile, formPopupCard, templateCard, itemListWrapper } from './popups.js'
-
+import { closePopup, callPopupProfile, callPopupCard, savePopupProfile, savePopupCard, formPopupProfile, formPopupCard, templateCard, itemListWrapper, renderItem, arrayFormControllers, generateCard } from './popups.js'
 
 const popups = document.querySelectorAll('.popup');
 const buttonEdit = document.querySelector('.profile__button-edit');
 const buttonNewPlace = document.querySelector('.profile__button-add');
 
+const validationOptions = {
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_inactive',
+  inputErrorClass: 'popup__input_visually-erroneous',
+  errorClass: 'popup__input-error_active'
+};
+
+const enableValidationForms = (options) => {
+  const forms = Array.from(document.forms);
+  forms.forEach((formInstance) => {
+    const formController = new FormValidator(formInstance, options);
+    arrayFormControllers.push(formController);
+    formController.enableValidation();
+  });
+};
+
+
 initialCards.forEach((card) => {
-  const cardElement = new Card(card.name, card.link, templateCard);
-  cardElement.renderItem(itemListWrapper);
+  generateCard(card.name,card.link);
 });
 
 popups.forEach((popup) => {
