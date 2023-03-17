@@ -71,7 +71,7 @@ class FormValidator {
   }
 }
 
-let arrayFormControllers = [];
+const arrayFormControllers = [];
 
 const validationOptions = {
   inputSelector: '.popup__input',
