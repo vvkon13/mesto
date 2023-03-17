@@ -1,6 +1,6 @@
 import FormValidator from './FormValidator.js';
-import { initialCards } from './cards.js';
-import { closePopup, callPopupProfile, callPopupCard, savePopupProfile, savePopupCard, formPopupProfile, formPopupCard, templateCard, itemListWrapper, renderItem, arrayFormControllers, generateCard } from './popups.js'
+import { initialCards } from './Cards.js';
+import { closePopup, callPopupProfile, callPopupCard, savePopupProfile, savePopupCard, formPopupProfile, formPopupCard, arrayFormControllers, generateCard } from './popups.js'
 
 const popups = document.querySelectorAll('.popup');
 const buttonEdit = document.querySelector('.profile__button-edit');

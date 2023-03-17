@@ -87,4 +87,4 @@ const renderItem = (wrap, cardElement) => {
 };
 
 
-export { closePopup, callPopupProfile, callPopupCard, savePopupProfile, savePopupCard, formPopupProfile, formPopupCard, itemListWrapper, templateCard, callPopupImage, renderItem, arrayFormControllers, generateCard }
+export { closePopup, callPopupProfile, callPopupCard, savePopupProfile, savePopupCard, formPopupProfile, formPopupCard, callPopupImage, arrayFormControllers, generateCard }
