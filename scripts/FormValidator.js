@@ -50,7 +50,6 @@ class FormValidator {
     errorElement.classList.add(this._options.errorClass);
   };
 
-  hideErrorstatus
   _hideInputErrorStatus = (inputElement, errorElement) => {
     errorElement.textContent = '';
     inputElement.classList.remove(this._options.inputErrorClass);
