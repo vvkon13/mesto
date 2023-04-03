@@ -1,4 +1,4 @@
-import Card from './Card.js';
+// import Card from './Card.js';
 // Какой-то глюк. На компьютере название файла с большой буквы Card.js на ГитХаб с маленькой card.js
 // Уже переименовывал. Удалял и новый файл делал. Все равно так. Не пойму что это.
 
@@ -24,35 +24,19 @@ const templateCard = document.getElementById('card');
 
 const arrayFormControllers = [];
 
-function handlerСlosePopupIfKeyEscape(evt) {
+/* function handlerСlosePopupIfKeyEscape(evt) {
   if ((evt.key) === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
-};
+}; */
 
-function openPopup(popup) {
+/* function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handlerСlosePopupIfKeyEscape);
-}
+} */
 
-function callPopupProfile(evt) {
-  const formController = arrayFormControllers.find(item => item._formInstance === formPopupProfile);
-  popupProfileName.value = profileName.textContent;
-  popupProfileDescription.value = profileDescription.textContent;
-  formController.checkFormForErrors();
-  openPopup(popupProfileWrapper);
-}
 
-function callPopupCard(evt) {
-  popupCardTitle.value = '';
-  popupCardLink.value = '';
-  // inputs - пустые деактивируем кнопку
-  const formController = arrayFormControllers.find(item => item._formInstance === formPopupCard);
-  formController.disableButton();
-  formController.clearValidationErrors();
-  openPopup(popupCardWrapper);
-}
 
 function callPopupImage(imageSrc, imageAlt, cardTitle) {
   popupImageImage.src = imageSrc;
@@ -60,6 +44,7 @@ function callPopupImage(imageSrc, imageAlt, cardTitle) {
   popupImageDescription.textContent = cardTitle;
   openPopup(popupImageWrapper);
 }
+
 
 function savePopupProfile(evt) {
   evt.preventDefault();
@@ -70,7 +55,9 @@ function savePopupProfile(evt) {
 
 const generateCard = (cardTitle, cardLink) => {
   const cardElement = new Card(cardTitle, cardLink, templateCard);
-  renderItem(itemListWrapper, cardElement.getItemElement());
+
+
+  // renderItem(itemListWrapper, cardElement.getItemElement());
 }
 
 function savePopupCard(evt) {
@@ -88,5 +75,4 @@ const renderItem = (wrap, cardElement) => {
   wrap.prepend(cardElement);
 };
 
-export { closePopup, callPopupProfile, callPopupCard, savePopupProfile, savePopupCard, formPopupProfile, formPopupCard, callPopupImage, arrayFormControllers, generateCard }
 

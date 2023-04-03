@@ -1,15 +1,15 @@
-import { callPopupImage } from "./popups.js";
-
-// Какой-то глюк. На компьютере название файла с большой буквы Card.js на ГитХаб с маленькой card.js
-// Уже переименовывал. Удалял и новый файл делал. Все равно так. Не пойму что это.
 class Card {
-  constructor(name, link, selectorTemplateElement) {
+  constructor(name, link, selectorTemplateElement, handleCardClick, handleCardRemove) {
     this._name = name;
     this._link = link;
     this._selectorTemplateElement = selectorTemplateElement;
+    this._handleCardClick = handleCardClick;
+    this._handleCardRemove = handleCardRemove;
   }
   _setEventListenerClickImage = () => {
-    this._itemImage.addEventListener('click', () => callPopupImage(this._link, `Фото ${this._name}`, this._name = name));
+    this._itemImage.addEventListener('click', () => {
+      this._handleCardClick(this._link, `Фото ${this._name}`, this._name);
+    });
   }
 
   _setEventListenerClickLike = () => {
@@ -40,6 +40,7 @@ class Card {
   }
 
   _removeCard = () => {
+    this._handleCardRemove(this);
     this.element.remove();
     this.element = null;
   }
