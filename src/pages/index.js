@@ -1,18 +1,20 @@
-import './pages/index.css'; // добавьте импорт главного файла стилей
+import './index.css';
 
-import FormValidator from './components/FormValidator.js';
-import { initialCards } from './scripts/arrayOfCards.js';
-import Section from './components/Section.js';
-import Card from './components/Card.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import UserInfo from './components/UserInfo.js';
+// добавьте импорт главного файла стилей
+
+import FormValidator from '../components/FormValidator.js';
+import { initialCards } from '../scripts/arrayOfCards.js';
+import Section from '../components/Section.js';
+import Card from '../components/Card.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
 
 const formPopupProfile = document.querySelector('[name="popup-profile"]');
 const formPopupCard = document.querySelector('[name="popup-card"]');
 const itemListWrapper = document.querySelector('.elements');
 const templateCard = document.getElementById('card');
-const arrayFormControllers = [];
+const formControllers = {};
 const buttonEdit = document.querySelector('.profile__button-edit');
 const buttonNewPlace = document.querySelector('.profile__button-add');
 
@@ -28,7 +30,7 @@ const enableValidationForms = (options) => {
   const forms = Array.from(document.forms);
   forms.forEach((formInstance) => {
     const formController = new FormValidator(formInstance, options);
-    arrayFormControllers.push(formController);
+    formControllers[formInstance.name] = formController;
     formController.enableValidation();
   });
 };
@@ -48,25 +50,26 @@ const user1 = new UserInfo({
 });
 
 user1.setUserInfo({
-  name: 'Жак',
-  description: 'Кустов'
+  profileName: 'Жак',
+  profileDescription: 'Кустов'
 });
 
 const popupProfile = new PopupWithForm('.popup_type_profile', {
   savePopup: (popupProfileValues) => {
-    user1.setUserInfo({
-      name: popupProfileValues['popup-name'],
-      description: popupProfileValues['popup-description']
-    })
+    user1.setUserInfo(popupProfileValues);
     popupProfile.close();
   }
 })
 
+const createCard = (cardName, cardLink) => {
+  const cardElement = new Card(cardName, cardLink, templateCard, handleCardClick);
+  return cardElement;
+}
+
 const popupCard = new PopupWithForm('.popup_type_card', {
   savePopup: (popupProfileValues) => {
-    const cardElement = new Card(popupProfileValues['popup-card-title'], popupProfileValues['popup-card-link'], templateCard, handleCardClick, handleCardRemove);
+    const cardElement = createCard(popupProfileValues['popup-card-title'], popupProfileValues['popup-card-link']);
     cardSection.addItem(cardElement.getItemElement());
-    cardList.push(cardElement);
     popupCard.close();
   }
 })
@@ -74,38 +77,27 @@ const popupCard = new PopupWithForm('.popup_type_card', {
 const popupImage = new PopupWithImage('.popup_type_image');
 
 const handleCardClick = (link, alt, name) => {
-  popupImage.open(link, alt, name)
+  popupImage.open(link, alt, name);
 };
 
-const handleCardRemove = (element) => {
-  const indexElementRemove = cardList.indexOf(element, 0);
-  if (indexElementRemove >= 0) {
-    cardList.splice(indexElementRemove, 1);
-  }
-}
-
 function callPopupProfile(evt) {
-  const formController = arrayFormControllers.find(item => item._formInstance === formPopupProfile);
-  const userInfo = user1.getUserInfo();
-  popupProfile.setInputValues(userInfo.name, userInfo.description);
-  formController.checkFormForErrors();
+  popupProfile.setInputValues(user1.getUserInfo());
+  formControllers['popup-profile'].checkFormForErrors();
   popupProfile.open();
 }
 
 function callPopupCard(evt) {
-  popupCard.setInputValues('', '');
-  // inputs - пустые деактивируем кнопку
-  const formController = arrayFormControllers.find(item => item._formInstance === formPopupCard);
-  formController.disableButton();
-  formController.clearValidationErrors();
+  /*   popupCard.resetForm();
+      formControllers['popup-card'].disableButton();
+      formControllers['popup-card'].clearValidationErrors(); */
   popupCard.open();
 }
 
-
 initialCards.forEach((card) => {
-  const cardElement = new Card(card.name, card.link, templateCard, handleCardClick, handleCardRemove);
+  const cardElement = createCard(card.name, card.link);
   cardList.push(cardElement);
 });
+
 cardSection.renderItems();
 popupProfile.setEventListeners();
 popupCard.setEventListeners();

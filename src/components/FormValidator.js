@@ -14,6 +14,10 @@ class FormValidator {
       });
     });
     this._toggleButtonStatus();
+    this._formInstance.addEventListener('reset', () => {
+      this.disableButton();
+      this.clearValidationErrors();
+    })
   };
 
   _toggleButtonStatus = () => {
