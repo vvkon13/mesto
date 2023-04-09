@@ -10,9 +10,6 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 
-const formPopupProfile = document.querySelector('[name="popup-profile"]');
-const formPopupCard = document.querySelector('[name="popup-card"]');
-const itemListWrapper = document.querySelector('.elements');
 const templateCard = document.getElementById('card');
 const formControllers = {};
 const buttonEdit = document.querySelector('.profile__button-edit');
@@ -35,12 +32,11 @@ const enableValidationForms = (options) => {
   });
 };
 
-const cardList = [];
-
 const cardSection = new Section({
-  items: cardList,
+  items: initialCards,
   renderer: (card) => {
-    itemListWrapper.prepend(card.getItemElement());
+    const newCard = createCard(card.name, card.link);
+    cardSection.addItem(newCard);
   }
 }, '.elements');
 
@@ -63,13 +59,12 @@ const popupProfile = new PopupWithForm('.popup_type_profile', {
 
 const createCard = (cardName, cardLink) => {
   const cardElement = new Card(cardName, cardLink, templateCard, handleCardClick);
-  return cardElement;
+  return cardElement.getItemElement();
 }
 
 const popupCard = new PopupWithForm('.popup_type_card', {
   savePopup: (popupProfileValues) => {
-    const cardElement = createCard(popupProfileValues['popup-card-title'], popupProfileValues['popup-card-link']);
-    cardSection.addItem(cardElement.getItemElement());
+    cardSection.addItem(createCard(popupProfileValues['popup-card-title'], popupProfileValues['popup-card-link']));
     popupCard.close();
   }
 })
@@ -87,16 +82,9 @@ function callPopupProfile(evt) {
 }
 
 function callPopupCard(evt) {
-  /*   popupCard.resetForm();
-      formControllers['popup-card'].disableButton();
-      formControllers['popup-card'].clearValidationErrors(); */
   popupCard.open();
 }
 
-initialCards.forEach((card) => {
-  const cardElement = createCard(card.name, card.link);
-  cardList.push(cardElement);
-});
 
 cardSection.renderItems();
 popupProfile.setEventListeners();
