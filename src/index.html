@@ -90,6 +90,16 @@
       </div>
     </section>
 
+    <section class="popup popup_type_card-deletion">
+      <div class="popup__container-card-deletion">
+        <form name="popup-confirm-card-deletion" novalidate>
+          <h2 class="popup__header">Вы уверены?</h2>
+          <button class="popup__button-save" type="submit" id="button-confirm-card-deletion">Да</button>
+        </form>
+        <button class="popup__button-close" type="button" id="button-close-profile"></button>
+      </div>
+    </section>
+
     <footer class="footer">
       <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
@@ -101,7 +111,10 @@
       <img src="<%=require('./images/saratov-bridge.jpg')%>" alt="" class="card__photo">
       <div class="card__description">
         <h2 class="card__name"></h2>
-        <button class="card__button-like" type="button"></button>
+        <div>
+          <button class="card__button-like" type="button"></button>
+          <p class="card__quantity-like"></p>
+        </div>
       </div>
       <button class="card__button-remove" type="button"></button>
     </li>

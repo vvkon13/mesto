@@ -1,7 +1,10 @@
 class Card {
-  constructor(name, link, selectorTemplateElement, handleCardClick) {
+  constructor(name, link, likes, idCard, idOwner, selectorTemplateElement, handleCardClick) {
     this._name = name;
     this._link = link;
+    this._likes = likes;
+    this._id = idCard;
+    this._ownerId = idOwner;
     this._selectorTemplateElement = selectorTemplateElement;
     this._handleCardClick = handleCardClick;
   }
@@ -19,7 +22,7 @@ class Card {
     this._trash.addEventListener('click', this._removeCard);
   }
 
-  getItemElement = () => {
+  getItemElement = (idUser) => {
     this.element = this._selectorTemplateElement.content.cloneNode(true).children[0];
     this._itemTitle = this.element.querySelector('.card__name');
     this._itemTitle.textContent = this._name;
@@ -30,7 +33,14 @@ class Card {
     this._like = this.element.querySelector('.card__button-like');
     this._setEventListenerClickLike();
     this._trash = this.element.querySelector('.card__button-remove');
+    if (idUser == this._ownerId) {
     this._setEventListenerClickTrash();
+    }
+    else {
+      this._trash.classList.add('card__button-remove_hidden');
+    }
+    this._quantityLike = this.element.querySelector('.card__quantity-like');
+    this._quantityLike.textContent = this._likes.length;
     return this.element;
   }
 

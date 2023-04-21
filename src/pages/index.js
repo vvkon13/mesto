@@ -39,19 +39,21 @@ const api = new Api({
 });
 
 api.getUserInformation()
-.then((data) => {
-  user1.setUserInfo({
-    profileName: data.name,
-    profileDescription: data.about
-  });
-  user1.setUserPhoto(data.avatar);
-})
+  .then((data) => {
+    user1.setUserInfo({
+      profileName: data.name,
+      profileDescription: data.about
+    });
+    user1.setUserPhoto(data.avatar);
+    user1.setUserId(data._id);
+  })
   .catch(() => {
     user1.setUserInfo({
       profileName: 'OOPS!!!',
       profileDescription: 'your advertisement should be here'
     });
     console.log('Информация о пользователе не загружена');
+    user1.setUserId('error');
   });
 
 
@@ -66,47 +68,54 @@ const enableValidationForms = (options) => {
 
 const iniCards = [];
 
+const cardSection = new Section(
+  {renderer: (card) => {
+    const newCard = createCard(card.name, card.link, card.likes,card._id, card.owner._id,user1.getUserId());
+    cardSection.addItem(newCard);
+  }}
+  , '.elements');
+
 api.getInitialCards()
-.then ((iniCards) =>{
-  const cardSection = new Section({
-    items: iniCards,
-    renderer: (card) => {
-      const newCard = createCard(card.name, card.link);
-      cardSection.addItem(newCard);
-    }
-  }, '.elements');
-  cardSection.renderItems();
-})
-.catch(() =>{
-  console.log('Карточки не загружены. Произошла ошибка');
-})
+  .then((iniCards) => {
+    cardSection.setItems(iniCards);
+    cardSection.renderItems();
+  })
+  .catch(() => {
+    console.log('Карточки не загружены. Произошла ошибка');
+  })
 
 
 
 const popupProfile = new PopupWithForm('.popup_type_profile', {
   savePopup: (popupProfileValues) => {
     api.setUserInformation(popupProfileValues)
-    .then(() => {
-      user1.setUserInfo(popupProfileValues);
-      popupProfile.close();
-    })
-    .catch(()=> {
-      console.log('Произошла ошибка записи данных пользователя на сервер');
-    })
+      .then(() => {
+        user1.setUserInfo(popupProfileValues);
+        popupProfile.close();
+      })
+      .catch(() => {
+        console.log('Произошла ошибка записи данных пользователя на сервер');
+      })
   }
 });
 
-const createCard = (cardName, cardLink) => {
-  const cardElement = new Card(cardName, cardLink, templateCard, handleCardClick);
-  return cardElement.getItemElement();
+const createCard = (cardName, cardLink, likes, id, idOwner, idUser) => {
+  const cardElement = new Card(cardName, cardLink, likes, id, idOwner, templateCard, handleCardClick);
+  return cardElement.getItemElement(idUser);
 }
 
 const popupCard = new PopupWithForm('.popup_type_card', {
   savePopup: (popupProfileValues) => {
-    cardSection.addItem(createCard(popupProfileValues['popup-card-title'], popupProfileValues['popup-card-link']));
+    api.addCard(popupProfileValues['popup-card-title'], popupProfileValues['popup-card-link'])
+      .then((data) => {
+        cardSection.addItem(createCard(data.name, data.link,data.likes, data._id, data.owner._id,user1.getUserId()));
+      })
+      .catch(() => {
+        console.log('Произошла ошибка записи данных карточки на сервер');
+      });
     popupCard.close();
   }
-})
+});
 
 const popupImage = new PopupWithImage('.popup_type_image');
 
