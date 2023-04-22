@@ -101,7 +101,7 @@ const popupProfile = new PopupWithForm('.popup_type_profile', {
 });
 
 const createCard = (cardName, cardLink, likes, id, idOwner, idUser) => {
-  const cardElement = new Card(cardName, cardLink, likes, id, idOwner, templateCard, handleCardClick, handleConfirmCardDelete);
+  const cardElement = new Card(cardName, cardLink, likes, id, idOwner, templateCard, handleCardClick, handleConfirmCardDelete, handleClickLike);
   return cardElement.getItemElement(idUser);
 }
 
@@ -144,6 +144,14 @@ const handleCardClick = (link, alt, name) => {
 const handleConfirmCardDelete = (card, cardId) => {
   popupConfirmDeleteCard.open(card, cardId);
 };
+
+const handleClickLike = (currentLikesUserId, cardId) => {
+  if (currentLikesUserId.includes(user1.getUserId())) {
+    return api.removeLikeCard(cardId);
+  }
+  else return api.likeCard(cardId);
+}
+
 
 function callPopupProfile(evt) {
   popupProfile.setInputValues(user1.getUserInfo());

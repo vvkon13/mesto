@@ -65,6 +65,32 @@ class Api {
     })
   }
 
+  likeCard(cardId) {
+    return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: this.headers
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      }
+      return Promise.reject('Error')
+    })
+  }
+
+  removeLikeCard(cardId) {
+    return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: this.headers
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      }
+      return Promise.reject('Error')
+    })
+  }
+
 
   // другие методы работы с API
 }

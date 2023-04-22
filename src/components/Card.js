@@ -1,5 +1,5 @@
 class Card {
-  constructor(name, link, likes, idCard, idOwner, selectorTemplateElement, handleCardClick,handleConfirmCardDelete) {
+  constructor(name, link, likes, idCard, idOwner, selectorTemplateElement, handleCardClick, handleConfirmCardDelete, handleClickLike) {
     this._name = name;
     this._link = link;
     this._likes = likes;
@@ -8,6 +8,7 @@ class Card {
     this._selectorTemplateElement = selectorTemplateElement;
     this._handleCardClick = handleCardClick;
     this._handleConfirmCardDelete = handleConfirmCardDelete;
+    this._handleClickLike = handleClickLike;
   }
   _setEventListenerClickImage = () => {
     this._itemImage.addEventListener('click', () => {
@@ -16,7 +17,17 @@ class Card {
   }
 
   _setEventListenerClickLike = () => {
-    this._like.addEventListener('click', this._likeCard);
+    this._like.addEventListener('click', () => {
+      this._handleClickLike(this._likesId, this._id)
+        .then(data => {
+          this._likes = data.likes;
+          this._likesId = this._likes.map((element) => { return element._id });
+          this._setLikes();
+        })
+        .catch(() => {
+          console.log('Произошла ошибка изменения статуса Лайка');
+        });
+    });
   }
 
   _setEventListenerClickTrash = () => {
@@ -37,18 +48,29 @@ class Card {
     this._setEventListenerClickLike();
     this._trash = this.element.querySelector('.card__button-remove');
     if (idUser == this._ownerId) {
-    this._setEventListenerClickTrash();
+      this._setEventListenerClickTrash();
     }
     else {
       this._trash.classList.add('card__button-remove_hidden');
     }
     this._quantityLike = this.element.querySelector('.card__quantity-like');
     this._quantityLike.textContent = this._likes.length;
+    this._likesId = this._likes.map((element) => { return element._id });
+    if (this._likesId.includes(idUser)) {
+      this._likeCard();
+    }
+
+
     return this.element;
   }
 
   getId = () => {
     return this._id;
+  }
+
+  _setLikes = () => {
+    this._quantityLike.textContent = this._likes.length;
+    this._likeCard();
   }
 
   _likeCard = () => {
