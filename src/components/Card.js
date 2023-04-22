@@ -1,5 +1,5 @@
 class Card {
-  constructor(name, link, likes, idCard, idOwner, selectorTemplateElement, handleCardClick) {
+  constructor(name, link, likes, idCard, idOwner, selectorTemplateElement, handleCardClick,handleConfirmCardDelete) {
     this._name = name;
     this._link = link;
     this._likes = likes;
@@ -7,6 +7,7 @@ class Card {
     this._ownerId = idOwner;
     this._selectorTemplateElement = selectorTemplateElement;
     this._handleCardClick = handleCardClick;
+    this._handleConfirmCardDelete = handleConfirmCardDelete;
   }
   _setEventListenerClickImage = () => {
     this._itemImage.addEventListener('click', () => {
@@ -19,7 +20,9 @@ class Card {
   }
 
   _setEventListenerClickTrash = () => {
-    this._trash.addEventListener('click', this._removeCard);
+    this._trash.addEventListener('click', () => {
+      this._handleConfirmCardDelete(this.element, this._id);
+    });
   }
 
   getItemElement = (idUser) => {
@@ -42,6 +45,10 @@ class Card {
     this._quantityLike = this.element.querySelector('.card__quantity-like');
     this._quantityLike.textContent = this._likes.length;
     return this.element;
+  }
+
+  getId = () => {
+    return this._id;
   }
 
   _likeCard = () => {

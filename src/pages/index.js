@@ -8,6 +8,7 @@ import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupConfirmDeleteElement from '../components/PopupConfirmDeleteElement.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
@@ -69,10 +70,12 @@ const enableValidationForms = (options) => {
 const iniCards = [];
 
 const cardSection = new Section(
-  {renderer: (card) => {
-    const newCard = createCard(card.name, card.link, card.likes,card._id, card.owner._id,user1.getUserId());
-    cardSection.addItem(newCard);
-  }}
+  {
+    renderer: (card) => {
+      const newCard = createCard(card.name, card.link, card.likes, card._id, card.owner._id, user1.getUserId());
+      cardSection.addItem(newCard);
+    }
+  }
   , '.elements');
 
 api.getInitialCards()
@@ -83,8 +86,6 @@ api.getInitialCards()
   .catch(() => {
     console.log('Карточки не загружены. Произошла ошибка');
   })
-
-
 
 const popupProfile = new PopupWithForm('.popup_type_profile', {
   savePopup: (popupProfileValues) => {
@@ -100,27 +101,48 @@ const popupProfile = new PopupWithForm('.popup_type_profile', {
 });
 
 const createCard = (cardName, cardLink, likes, id, idOwner, idUser) => {
-  const cardElement = new Card(cardName, cardLink, likes, id, idOwner, templateCard, handleCardClick);
+  const cardElement = new Card(cardName, cardLink, likes, id, idOwner, templateCard, handleCardClick, handleConfirmCardDelete);
   return cardElement.getItemElement(idUser);
 }
+
+const popupConfirmDeleteCard = new PopupConfirmDeleteElement('.popup_type_card-deletion', {
+  deleteCard: (cardId, card) => {
+    api.deleteCard(cardId)
+      .then((res) => {
+        if (res.ok) {
+          card.remove();
+          card = null;
+          popupConfirmDeleteCard.close();
+        }
+      })
+      .catch(() => {
+        console.log('Произошла ошибка удаления карточки на сервере');
+      });
+  }
+})
 
 const popupCard = new PopupWithForm('.popup_type_card', {
   savePopup: (popupProfileValues) => {
     api.addCard(popupProfileValues['popup-card-title'], popupProfileValues['popup-card-link'])
       .then((data) => {
-        cardSection.addItem(createCard(data.name, data.link,data.likes, data._id, data.owner._id,user1.getUserId()));
+        cardSection.addItem(createCard(data.name, data.link, data.likes, data._id, data.owner._id, user1.getUserId()));
+        popupCard.close();
       })
       .catch(() => {
         console.log('Произошла ошибка записи данных карточки на сервер');
       });
-    popupCard.close();
   }
 });
+
 
 const popupImage = new PopupWithImage('.popup_type_image');
 
 const handleCardClick = (link, alt, name) => {
   popupImage.open(link, alt, name);
+};
+
+const handleConfirmCardDelete = (card, cardId) => {
+  popupConfirmDeleteCard.open(card, cardId);
 };
 
 function callPopupProfile(evt) {
@@ -137,6 +159,7 @@ function callPopupCard(evt) {
 popupProfile.setEventListeners();
 popupCard.setEventListeners();
 popupImage.setEventListeners();
+popupConfirmDeleteCard.setEventListeners();
 enableValidationForms(validationOptions);
 buttonEdit.addEventListener('click', callPopupProfile);
 buttonNewPlace.addEventListener('click', callPopupCard);
