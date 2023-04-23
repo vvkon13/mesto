@@ -3,7 +3,6 @@
 // добавьте импорт главного файла стилей
 
 import FormValidator from '../components/FormValidator.js';
-import { initialCards } from '../scripts/arrayOfCards.js';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -16,6 +15,7 @@ const templateCard = document.getElementById('card');
 const formControllers = {};
 const buttonEdit = document.querySelector('.profile__button-edit');
 const buttonNewPlace = document.querySelector('.profile__button-add');
+const avatarWrapper = document.querySelector('.profile__photo-wrapper');
 
 const validationOptions = {
   inputSelector: '.popup__input',
@@ -57,7 +57,6 @@ api.getUserInformation()
     user1.setUserId('error');
   });
 
-
 const enableValidationForms = (options) => {
   const forms = Array.from(document.forms);
   forms.forEach((formInstance) => {
@@ -66,8 +65,6 @@ const enableValidationForms = (options) => {
     formController.enableValidation();
   });
 };
-
-const iniCards = [];
 
 const cardSection = new Section(
   {
@@ -89,14 +86,11 @@ api.getInitialCards()
 
 const popupProfile = new PopupWithForm('.popup_type_profile', {
   savePopup: (popupProfileValues) => {
-    api.setUserInformation(popupProfileValues)
+    return api.setUserInformation(popupProfileValues)
       .then(() => {
         user1.setUserInfo(popupProfileValues);
         popupProfile.close();
-      })
-      .catch(() => {
-        console.log('Произошла ошибка записи данных пользователя на сервер');
-      })
+      });
   }
 });
 
@@ -123,19 +117,27 @@ const popupConfirmDeleteCard = new PopupConfirmDeleteElement('.popup_type_card-d
 
 const popupCard = new PopupWithForm('.popup_type_card', {
   savePopup: (popupProfileValues) => {
-    api.addCard(popupProfileValues['popup-card-title'], popupProfileValues['popup-card-link'])
+    return api.addCard(popupProfileValues['popup-card-title'], popupProfileValues['popup-card-link'])
       .then((data) => {
         cardSection.addItem(createCard(data.name, data.link, data.likes, data._id, data.owner._id, user1.getUserId()));
         popupCard.close();
-      })
-      .catch(() => {
-        console.log('Произошла ошибка записи данных карточки на сервер');
       });
   }
 });
 
-
 const popupImage = new PopupWithImage('.popup_type_image');
+
+const popupUpdateAvatar = new PopupWithForm('.popup_type_update-avatar', {
+  savePopup: (popupProfileValues) => {
+    return api.updateAvatarUsrer(popupProfileValues['popup-avatar-link'])
+      .then((res) => {
+        if (res.ok) {
+          user1.setUserPhoto(popupProfileValues['popup-avatar-link']);
+          popupUpdateAvatar.close();
+        }
+      });
+  }
+});
 
 const handleCardClick = (link, alt, name) => {
   popupImage.open(link, alt, name);
@@ -152,7 +154,6 @@ const handleClickLike = (currentLikesUserId, cardId) => {
   else return api.likeCard(cardId);
 }
 
-
 function callPopupProfile(evt) {
   popupProfile.setInputValues(user1.getUserInfo());
   formControllers['popup-profile'].checkFormForErrors();
@@ -163,14 +164,20 @@ function callPopupCard(evt) {
   popupCard.open();
 }
 
+function callPopupUpdateAvatar(evt) {
+  popupUpdateAvatar.open();
+}
+
 
 popupProfile.setEventListeners();
 popupCard.setEventListeners();
 popupImage.setEventListeners();
 popupConfirmDeleteCard.setEventListeners();
+popupUpdateAvatar.setEventListeners();
 enableValidationForms(validationOptions);
 buttonEdit.addEventListener('click', callPopupProfile);
 buttonNewPlace.addEventListener('click', callPopupCard);
+avatarWrapper.addEventListener('click', callPopupUpdateAvatar);
 
 
 

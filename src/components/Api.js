@@ -50,12 +50,12 @@ class Api {
         link: link
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json()
-      }
-      return Promise.reject('Error')
-    })
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject('Error')
+      })
   }
 
   deleteCard(cardId) {
@@ -70,12 +70,12 @@ class Api {
       method: 'PUT',
       headers: this.headers
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json()
-      }
-      return Promise.reject('Error')
-    })
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject('Error')
+      })
   }
 
   removeLikeCard(cardId) {
@@ -83,16 +83,23 @@ class Api {
       method: 'DELETE',
       headers: this.headers
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json()
-      }
-      return Promise.reject('Error')
-    })
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject('Error')
+      })
   }
 
-
-  // другие методы работы с API
+  updateAvatarUsrer(avatarLink) {
+    return fetch(`${this.baseUrl}/users/me/avatar `, {
+      method: 'PATCH',
+      headers: this.headers,
+      body: JSON.stringify({
+        avatar: avatarLink
+      })
+    })
+  }
 }
 
 export default Api;
