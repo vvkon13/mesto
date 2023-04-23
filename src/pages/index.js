@@ -1,4 +1,4 @@
-// import './index.css';
+import './index.css';
 
 // добавьте импорт главного файла стилей
 
