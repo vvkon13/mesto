@@ -9,12 +9,7 @@ class Api {
       method: 'GET',
       headers: this.headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject('Error')
-      })
+      .then(this._checkResponse)
   }
 
   getInitialCards() {
@@ -22,12 +17,7 @@ class Api {
       method: 'GET',
       headers: this.headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject('Error')
-      })
+      .then(this._checkResponse);
   }
 
   setUserInformation({ profileName, profileDescription }) {
@@ -39,6 +29,7 @@ class Api {
         about: profileDescription
       })
     })
+      .then(this._checkResponse);
   }
 
   addCard(name, link) {
@@ -50,12 +41,7 @@ class Api {
         link: link
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject('Error')
-      })
+      .then(this._checkResponse)
   }
 
   deleteCard(cardId) {
@@ -70,12 +56,7 @@ class Api {
       method: 'PUT',
       headers: this.headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject('Error')
-      })
+      .then(this._checkResponse)
   }
 
   removeLikeCard(cardId) {
@@ -83,12 +64,7 @@ class Api {
       method: 'DELETE',
       headers: this.headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject('Error')
-      })
+      .then(this._checkResponse)
   }
 
   updateAvatarUsrer(avatarLink) {
@@ -99,6 +75,13 @@ class Api {
         avatar: avatarLink
       })
     })
+  }
+
+  _checkResponse = (res) => {
+    if (res.ok) {
+      return res.json()
+    }
+    return Promise.reject('Error')
   }
 }
 

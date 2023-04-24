@@ -36,6 +36,17 @@ class Card {
     });
   }
 
+  _installEventListeners = (idUser) => {
+    this._setEventListenerClickImage();
+    this._setEventListenerClickLike();
+    if (idUser == this._ownerId) {
+      this._setEventListenerClickTrash();
+    }
+    else {
+      this._trash.classList.add('card__button-remove_hidden');
+    }
+  }
+
   getItemElement = (idUser) => {
     this.element = this._selectorTemplateElement.content.cloneNode(true).children[0];
     this._itemTitle = this.element.querySelector('.card__name');
@@ -43,25 +54,20 @@ class Card {
     this._itemImage = this.element.querySelector('.card__photo');
     this._itemImage.src = this._link;
     this._itemImage.alt = `Фото ${this._name}`;
-    this._setEventListenerClickImage();
     this._like = this.element.querySelector('.card__button-like');
-    this._setEventListenerClickLike();
     this._trash = this.element.querySelector('.card__button-remove');
-    if (idUser == this._ownerId) {
-      this._setEventListenerClickTrash();
-    }
-    else {
-      this._trash.classList.add('card__button-remove_hidden');
-    }
     this._quantityLike = this.element.querySelector('.card__quantity-like');
     this._quantityLike.textContent = this._likes.length;
     this._likesId = this._likes.map((element) => { return element._id });
     if (this._likesId.includes(idUser)) {
       this._likeCard();
-    }
-
-
+    };
+    this._installEventListeners(idUser);
     return this.element;
+  }
+
+  getCard = () => {
+    return this;
   }
 
   getId = () => {
@@ -82,7 +88,6 @@ class Card {
     this.element = null;
   }
 }
-
 
 export default Card;
 

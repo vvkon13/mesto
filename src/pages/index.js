@@ -1,7 +1,5 @@
 import './index.css';
 
-// добавьте импорт главного файла стилей
-
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
@@ -10,20 +8,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupConfirmDeleteElement from '../components/PopupConfirmDeleteElement.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
-
-const templateCard = document.getElementById('card');
-const formControllers = {};
-const buttonEdit = document.querySelector('.profile__button-edit');
-const buttonNewPlace = document.querySelector('.profile__button-add');
-const avatarWrapper = document.querySelector('.profile__photo-wrapper');
-
-const validationOptions = {
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button-save',
-  inactiveButtonClass: 'popup__button-save_inactive',
-  inputErrorClass: 'popup__input_visually-erroneous',
-  errorClass: 'popup__input-error_active'
-};
+import { templateCard, formControllers, buttonEdit, buttonNewPlace, avatarWrapper, validationOptions } from '../utils/constants.js';
 
 const user1 = new UserInfo({
   profileNameSelector: '.profile__name',
@@ -38,24 +23,6 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
-
-api.getUserInformation()
-  .then((data) => {
-    user1.setUserInfo({
-      profileName: data.name,
-      profileDescription: data.about
-    });
-    user1.setUserPhoto(data.avatar);
-    user1.setUserId(data._id);
-  })
-  .catch(() => {
-    user1.setUserInfo({
-      profileName: 'OOPS!!!',
-      profileDescription: 'your advertisement should be here'
-    });
-    console.log('Информация о пользователе не загружена');
-    user1.setUserId('error');
-  });
 
 const enableValidationForms = (options) => {
   const forms = Array.from(document.forms);
@@ -75,13 +42,25 @@ const cardSection = new Section(
   }
   , '.elements');
 
-api.getInitialCards()
-  .then((iniCards) => {
+Promise.all([api.getUserInformation(), api.getInitialCards()])
+  .then(([userData, iniCards]) => {
+    user1.setUserInfo({
+      profileName: userData.name,
+      profileDescription: userData.about
+    });
+    user1.setUserPhoto(userData.avatar);
+    user1.setUserId(userData._id);
     cardSection.setItems(iniCards);
     cardSection.renderItems();
   })
   .catch(() => {
     console.log('Карточки не загружены. Произошла ошибка');
+    user1.setUserInfo({
+      profileName: 'OOPS!!!',
+      profileDescription: 'your advertisement should be here'
+    });
+    console.log('Информация о пользователе не загружена');
+    user1.setUserId('error');
   })
 
 const popupProfile = new PopupWithForm('.popup_type_profile', {
@@ -119,7 +98,7 @@ const popupCard = new PopupWithForm('.popup_type_card', {
   savePopup: (popupProfileValues) => {
     return api.addCard(popupProfileValues['popup-card-title'], popupProfileValues['popup-card-link'])
       .then((data) => {
-        cardSection.addItem(createCard(data.name, data.link, data.likes, data._id, data.owner._id, user1.getUserId()));
+        cardSection.prependItem(createCard(data.name, data.link, data.likes, data._id, data.owner._id, user1.getUserId()));
         popupCard.close();
       });
   }

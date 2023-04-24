@@ -10,8 +10,3 @@
   z-index: 1;
 }
 
-@media (max-width:564px) {
-  .profile__photo {
-    left: auto;
-  }
-}
