@@ -81,12 +81,10 @@ const createCard = (cardName, cardLink, likes, id, idOwner, idUser) => {
 const popupConfirmDeleteCard = new PopupConfirmDeleteElement('.popup_type_card-deletion', {
   deleteCard: (cardId, card) => {
     api.deleteCard(cardId)
-      .then((res) => {
-        if (res.ok) {
-          card.remove();
-          card = null;
-          popupConfirmDeleteCard.close();
-        }
+      .then(() => {
+        card.remove();
+        card = null;
+        popupConfirmDeleteCard.close();
       })
       .catch(() => {
         console.log('Произошла ошибка удаления карточки на сервере');
@@ -109,12 +107,10 @@ const popupImage = new PopupWithImage('.popup_type_image');
 const popupUpdateAvatar = new PopupWithForm('.popup_type_update-avatar', {
   savePopup: (popupProfileValues) => {
     return api.updateAvatarUsrer(popupProfileValues['popup-avatar-link'])
-      .then((res) => {
-        if (res.ok) {
-          user1.setUserPhoto(popupProfileValues['popup-avatar-link']);
-          popupUpdateAvatar.close();
-        }
-      });
+      .then(() => {
+        user1.setUserPhoto(popupProfileValues['popup-avatar-link']);
+        popupUpdateAvatar.close();
+      })
   }
 });
 
