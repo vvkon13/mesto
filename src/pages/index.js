@@ -79,11 +79,10 @@ const createCard = (cardName, cardLink, likes, id, idOwner, idUser) => {
 }
 
 const popupConfirmDeleteCard = new PopupConfirmDeleteElement('.popup_type_card-deletion', {
-  deleteCard: (cardId, card) => {
-    api.deleteCard(cardId)
+  deleteCard: (card) => {
+    api.deleteCard(card.getId())
       .then(() => {
-        card.remove();
-        card = null;
+        card.removeCard();
         popupConfirmDeleteCard.close();
       })
       .catch(() => {
@@ -118,8 +117,8 @@ const handleCardClick = (link, alt, name) => {
   popupImage.open(link, alt, name);
 };
 
-const handleConfirmCardDelete = (card, cardId) => {
-  popupConfirmDeleteCard.open(card, cardId);
+const handleConfirmCardDelete = (card) => {
+  popupConfirmDeleteCard.open(card);
 };
 
 const handleClickLike = (currentLikesUserId, cardId) => {

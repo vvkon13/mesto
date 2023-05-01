@@ -32,7 +32,7 @@ class Card {
 
   _setEventListenerClickTrash = () => {
     this._trash.addEventListener('click', () => {
-      this._handleConfirmCardDelete(this.element, this._id);
+      this._handleConfirmCardDelete(this);
     });
   }
 
@@ -83,11 +83,12 @@ class Card {
     this._like.classList.toggle('card__button-like_active');
   }
 
-  _removeCard = () => {
+  removeCard = () => {
     this.element.remove();
     this.element = null;
   }
 }
 
 export default Card;
+
 

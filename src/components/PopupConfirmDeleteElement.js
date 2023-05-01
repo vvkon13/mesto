@@ -10,13 +10,8 @@ export default class PopupConfirmDeleteElement extends Popup {
     return this._cardDeleted;
   }
 
-  getCardIdtDeleted() {
-    return this._cardIdDeleted;
-  }
-
-  open(card, cardId) {
+  open(card) {
     this._cardDeleted = card;
-    this._cardIdDeleted = cardId;
     super.open();
   }
 
@@ -24,7 +19,7 @@ export default class PopupConfirmDeleteElement extends Popup {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit(this.getCardIdtDeleted(),this.getCardDeleted());
+      this._handleFormSubmit(this.getCardDeleted());
     });
   }
 }
